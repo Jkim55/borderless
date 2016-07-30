@@ -1,0 +1,11 @@
+#wrapper {
+  background: url(../images/flight.jpeg) no-repeat center;
+  background-color: black;
+  /*background-size: contain;*/
+  max-height: 100vh;
+  max-width: 100vw;
+}
+
+h3 {
+  color: white;
+}
