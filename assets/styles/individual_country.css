@@ -1,0 +1,44 @@
+body {
+  background: url(../images/asia.jpeg) no-repeat;
+  background-color: black;
+  background-size:cover;
+  color: black;
+}
+
+p {
+  margin: 0 0 10px 0;
+}
+
+#logo {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+#logo h3{
+  display: block;
+}
+
+.vertical_center{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  letter-spacing: 3px
+}
+
+/*.vertical_center>*{
+  display: block;
+}*/
+
+.btn_margin {
+  margin-bottom: 150px
+}
+
+.btn_submit {
+  padding: 15px 0 15px 0;
+}
+
+footer>a{
+  align-content: flex-end;
+  justify-content: flex-end;
+  color: white;
+}
