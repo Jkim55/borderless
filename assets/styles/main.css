@@ -5,16 +5,41 @@ body {
   color: white;
 }
 
-h3 {
-  color: white;
+
+#logo {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+#logo h3{
+  display: block;
+}
+
+div>p {
+  margin: 0 0 10px;
 }
 
 .vertical_center{
   min-height: 100vh;
-  align-items: center;
   display: flex;
+  align-items: center;
+  letter-spacing: 3px
 }
 
-.btn_margin{
+/*.vertical_center>*{
+  display: block;
+}*/
+
+.btn_margin {
   margin-bottom: 150px
+}
+
+.btn_submit {
+  padding: 15px 0 15px 0;
+}
+
+footer>a{
+  align-content: flex-end;
+  justify-content: flex-end;
+  color: white;
 }

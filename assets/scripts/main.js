@@ -15,6 +15,6 @@ $(function() {
 $("#submit").click(()=>{
   let countrySelected = $('#searchBox').val();
   var countryURL = "https://travelbriefing.org/"+countrySelected+"?format=json"
-  // $.get(countryURL)
-
+  // console.log(countryURL);
+  $.get(countryURL).then((data) => {console.log(data)})
 })
