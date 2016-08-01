@@ -1,28 +1,6 @@
 // GLOBAL VARIABLES
 let parsedData;  // instatiated so that parsedData can hold value of promise from CONTROLLER FUNCTION
 
-
-//FUNCTION: Appending flag image to prepopulated list
-function appendFlags(iso2){
-  let flagIMG = $("<iMG>")
-  let countryIOUrl = 'http://www.geonames.org/flags/x/'+ iso2 + '.gif'
-  flagIMG.attr('src', countryIOUrl)
-  flagIMG.attr('height', "20px")
-  // flagIMG.attr('width', "20px") //not sure if this is necc. esp re retain proportion
-  // $("#searchBox").append(flagIMG);
-}
-
-// Reformatting world io to reverse key value pairs for easier manipulation
-function reformatWorldio (){
-  let reformattedObj = {}
-  $.get("https://galvanize-cors-proxy.herokuapp.com/http://country.io/names.json").then((data)=> {
-    for (key in data) {
-      reformattedObj[data[key].replace(/ /g, "_")] = key
-    }
-    return reformattedObj
-  })
-}
-
 // MASTER CONTROLLER FUNCTION: onClick re Let's Go Button:index
 $("#submit").click((event)=>{
   event.preventDefault()             // prevents button from navigating away from page
