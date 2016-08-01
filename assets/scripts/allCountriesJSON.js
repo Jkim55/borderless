@@ -1,4 +1,4 @@
-[
+let allCountries_JSON = [
   {
       "name": "Afghanistan",
       "url": "https://travelbriefing.org/Afghanistan?format=json"

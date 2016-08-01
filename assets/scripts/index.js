@@ -1,20 +1,6 @@
 // GLOBAL VARIABLES
 let parsedData;  // instatiated so that parsedData can hold value of promise from CONTROLLER FUNCTION
 
-// FUNCTION: consumes travelbriefing's all-countries JSON & prepopulate search options for search box:index
-$(function prePopulate() {
-  var mainURL="https://galvanize-cors-proxy.herokuapp.com/https://travelbriefing.org/countries.json"
-  var countryNames=[]
-  $.get(mainURL)
-  .then((countryArr)=>{
-    for (var countryIndex in countryArr)
-    countryNames.push(countryArr[countryIndex].name)})
-
-  $("#searchBox").autocomplete({
-    source: countryNames
-    // add flag img to prepopulated list
-  })
-})
 
 //FUNCTION: Appending flag image to prepopulated list
 function appendFlags(iso2){
@@ -31,13 +17,13 @@ function reformatWorldio (){
   let reformattedObj = {}
   $.get("https://galvanize-cors-proxy.herokuapp.com/http://country.io/names.json").then((data)=> {
     for (key in data) {
-      reformattedObj[data[key]] = key
+      reformattedObj[data[key].replace(/ /g, "_")] = key
     }
     return reformattedObj
   })
 }
 
-// CONTROLLER FUNCTION: onClick re Let's Go Button:index
+// MASTER CONTROLLER FUNCTION: onClick re Let's Go Button:index
 $("#submit").click((event)=>{
   event.preventDefault()             // prevents button from navigating away from page
   let jsonURL = getCountryJSON()     // assigns result of getCountryJSON to variable
@@ -104,7 +90,6 @@ function parseJSONsection2(obj) {
   extractVaccinations()
   extractWaterDrinkability()
   extractPhone()
-  // ADD: Visa information - either create one yourself or continue looking for an API
 }
 
 function extractTravelAdvisories() {
@@ -112,11 +97,11 @@ function extractTravelAdvisories() {
 
 }
 
-function extractVaccinations(){
+function extractVaccinations() {
   console.log("Vaccinations required: ", obj.vaccinations); //iterate thru array of objs; keys: message & name
 }
 
-function extractWaterDrinkability(){
+function extractWaterDrinkability() {
   console.log("Water Drinkability Advisement: ", obj.water.short);
 }
 
@@ -124,12 +109,3 @@ function extractPhone() {
   console.log("Country code: ", obj.telephone.calling_code);
   console.log("Police: ", obj.telephone.police);
 }
-
-
-
-
-// localStorage.setItem("username", "John");
-// localStorage.getItem("username");
-// localStorage.clear()
-
-//Idea of modals for news
