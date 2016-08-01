@@ -18,9 +18,8 @@ function getCountryJSON(){
   var countryURL = "https://galvanize-cors-proxy.herokuapp.com/https://travelbriefing.org/"+countryName+"?format=json"
   $.get(countryURL)
   .then((data)=>{
-    return JSON.parse(data)  // parsed json object (is this the only hit to the api? or does it call multiple time for lines 24 - 31)
-  })
-  .then((data)=>{
+    data = JSON.parse(data)  // parsed json object (is this the only hit to the api? or does it call multiple time for lines 24 - 31)
+    console.log(data);
     console.log("name: ", data.names.name)
     console.log("full name: ", data.names.full)
     // flag: "http://www.geonames.org/flags/x/" + (data["names"]["iso2"]) + ".gif"   // ie http://www.geonames.org/flags/x/jm.gif
