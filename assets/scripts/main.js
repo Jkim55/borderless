@@ -1,4 +1,4 @@
-$(function prePopulate (){
+$(function prePopulate() {
   var mainURL="https://galvanize-cors-proxy.herokuapp.com/https://travelbriefing.org/countries.json"
   var countryNames=[]
 
@@ -9,8 +9,8 @@ $(function prePopulate (){
 
   $("#searchBox").autocomplete({
     source: countryNames
-  });
-});
+  })
+})
 
 function getCountryJSON(){
   let countryName = $('#searchBox').val()
@@ -18,9 +18,20 @@ function getCountryJSON(){
   var countryURL = "https://galvanize-cors-proxy.herokuapp.com/https://travelbriefing.org/"+countryName+"?format=json"
   $.get(countryURL)
   .then((data)=>{
-    // data.replace(/\u21b5/g,'');
-    console.log(data)
+    return JSON.parse(data)  // parsed json object (is this the only hit to the api? or does it call multiple time for lines 24 - 31)
   })
+  .then((data)=>{
+    console.log("name: ", data.names.name)
+    console.log("full name: ", data.names.full)
+    // flag: "http://www.geonames.org/flags/x/" + (data["names"]["iso2"]) + ".gif"   // ie http://www.geonames.org/flags/x/jm.gif
+    console.log("Array of languages: ", data.language); //iterate thru the array of objs; keys: language & official
+    console.log("Country code: ", data.telephone.calling_code);
+    console.log("Police: ", data.telephone.police);
+    console.log("Water Drinkability Advisement: ", data.water.short);
+    console.log("Vaccinations required: ", data.vaccinations); //iterate thru array of objs; keys: message & name
+    console.log("Travel Advisories: ", data.advise); // Object of objs with key (country ISO2) and values of an obj that has keys of advise & URL (will want to correlate with ISO- http://country.io/names.json)
+  })
+
 }
 
 $("#submit").click((event)=>{
@@ -28,20 +39,6 @@ $("#submit").click((event)=>{
   getCountryJSON()
 })
 
-
 // localStorage.setItem("username", "John");
 // localStorage.getItem("username");
 // localStorage.clear()
-//
-// console.log("name: " + data["names"]["name"])
-// console.log("full name: "  data["names"]["full"]
-// flag: "http://www.geonames.org/flags/x/" + (data["names"]["iso2"])
-//  + ".gif"   // ie http://www.geonames.org/flags/x/jm.gif
-// official language: data["language"][i]["language"] //iterate thru this
-// country code: data["telephone"]["calling_code"]
-// police: data["telephone"]["police"]
-// water: data["water"]["short"] // if null = have a message that says there's no info
-// vaccinations: data["vaccinations"] //iterate thru each item in the object; print each item's name & message keys to get their values. // if no info = display message
-// travel advisories: data["advise"] //iterate thru each item in the object
-//
-// // To print where the advisories are coming from you need to link the key from an array that you create: which  is will be an array of objs: {data["names"]["name"]:data["names"]["iso2"]}
