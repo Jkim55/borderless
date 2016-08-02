@@ -9,7 +9,7 @@ function buildSection2() {
 }
 
 function extractTravelAdvisories() {
-  console.log("Travel Advisories: ", parsedData.advise);
+  console.log("Travel Advisories: ", parsedData.advise)
   // Will want to correlate with ISO- http://country.io/names.json)
   // OBJ looks like this... must iterate thru the OBJ to pull data value, which is a nested obj
   //     {ISO2: {
@@ -34,15 +34,15 @@ function extractVaccinations() {
 }
 
 function extractWaterDrinkability() {
-  let waterDrinkability = parsedData.water.short)
+  let waterDrinkability = parsedData.water.short
   // string to format as: "Drinking tap water in <country name> is <waterDrinkability>"
   // create a rule - if null, then display default:
   // "Unfortunately we do not have information about tap water in Taiwan"
 }
 
 function extractPhone() {
-  let countryCode = parsedData.telephone.calling_code;
-  let police = parsedData.telephone.police;
+  let countryCode = parsedData.telephone.calling_code
+  let police = parsedData.telephone.police
 }
 
 function extractCurrency(){

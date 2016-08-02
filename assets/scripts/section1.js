@@ -8,23 +8,28 @@ function buildSection1() {
   extractTime()
 }
 
-function extractName(){ //iterate thru names: parsedData.names.name & parsedData.names.full
+function extractName(){
   let shortName = parsedData.names.name
-  let full name = parsedData.names.full
+  let fullName = parsedData.names.full
+  // append two tags
 }
 
 function extractCapital(){
-
+  let iso2 = parsedData.names.iso2
+  let capital
+  $.get("https://galvanize-cors-proxy.herokuapp.com/http://country.io/capital.json")
+  .then((capitalISOPairs)=>{
+    if (capitalISOPairs.hasOwnProperty(iso2)){
+      capital = capitalISOPairs[iso2]
+    }
+  })
+  // append capital
 }
 
 function appendFlag(){
-  let flagURL = "http://www.geonames.org/flags/x/" + parsedData["names"]["iso2"] + ".gif"
-  // create img tag & append to html
-  // <img id='myImage' src="http://www.geonames.org/flags/x/??.gif" />
-
-  // or just change an already existing img
-  // $("#myImage").attr('src', "http://www.geonames.org/flags/x/" + countryCode + ".gif")
-  //     which one is better?
+  let iso2Flag = parsedData.names.iso2.toLowerCase()
+  let flagURL = "http://www.geonames.org/flags/x/" + iso2Flag  + ".gif"
+  // append src to flag img
 }
 
 function extractMap(){
@@ -37,22 +42,30 @@ function extractMap(){
 
 function extractLanguage(){
   let languageArr = parsedData.language
-  let languages = ""  // might change to array
+  let languageOutput = []  // might change to array
   for(let language in languageArr){
-    let language = languageArr[language].language
-    let official = languageArr[language].official
-    // if official = no, add '*' to <language>, then add to language String
-    // find way to join with ',' and '&'...  as string or array.join?
+    if(languageArr[language].official === 'Yes'){
+        languageOutput.push(languageArr[language].language)
+    } else {
+      languageOutput.push(languageArr[language].language + '*')
+    }
   }
+  languageOutput.splice(languageOutput.length-1,0,'and')
+  languageOutput = languageOutput.join(', ')
+  // put languageOutput into the message as per below
+
   // format message to read as below.
-  //    The languages spoken in <country name> are <language array string>
-  //    * Not an official language / spoken in some parts of the country
+  //    The languages spoken in <country name> are <languageOutput>
+  //    * Not an official language
 }
+
 
 function extractTime(){
   let timezone = parsedData.timezone.name
   let timestampUTC = Date.now()
+  // use js built in Date methods
   // use Moment Timezone here ...bring in CDN
   //    <timezone> (GMT <GMT TIME ie. +08:00>)
   //    That makes the current date and time <date>, <time>
+
 }
