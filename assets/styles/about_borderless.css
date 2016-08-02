@@ -2,6 +2,7 @@ body {
   background: url(../images/marrakech.jpeg) no-repeat;
   background-color: black;
   background-size:cover;
+  min-width: 100vh;
   color: black;
 }
 

@@ -1,29 +1,58 @@
 // CONTROLLER FUNCTION: triggers helper(?) functions that parses single country's JSON
 function buildSection1() {
   extractName()
+  extractCapital()
   appendFlag()
   extractMap()
   extractLanguage()
   extractTime()
 }
 
-function extractName(){
-  console.log("name: ", parsedData.names.name)
-  console.log("full name: ", parsedData.names.full)
+function extractName(){ //iterate thru names: parsedData.names.name & parsedData.names.full
+  let shortName = parsedData.names.name
+  let full name = parsedData.names.full
+}
+
+function extractCapital(){
+
 }
 
 function appendFlag(){
-  //add flag: "http://www.geonames.org/flags/x/" + (parsedData["names"]["iso2"]) + ".gif"
+  let flagURL = "http://www.geonames.org/flags/x/" + parsedData["names"]["iso2"] + ".gif"
+  // create img tag & append to html
+  // <img id='myImage' src="http://www.geonames.org/flags/x/??.gif" />
+
+  // or just change an already existing img
+  // $("#myImage").attr('src', "http://www.geonames.org/flags/x/" + countryCode + ".gif")
+  //     which one is better?
 }
+
 function extractMap(){
-  console.log("Lat: ", parsedData.maps.lat,"Long: ", parsedData.maps.long,"Zoom: ", parsedData.maps.zoom) //iterate thru parsedData; keys: lat, long, zoom
+  let lat = parsedData.maps.lat
+  let long = parsedData.maps.long
+  let zoom = parsedData.maps.zoom
+  // use lat, long, zoom to create GoogMaps view
+  // see googleMapTest.html re example from GoogleMapsAPI
 }
 
 function extractLanguage(){
-  console.log("Array of languages: ", parsedData.language); //iterate array of objs; keys: language & official
+  let languageArr = parsedData.language
+  let languages = ""  // might change to array
+  for(let language in languageArr){
+    let language = languageArr[language].language
+    let official = languageArr[language].official
+    // if official = no, add '*' to <language>, then add to language String
+    // find way to join with ',' and '&'...  as string or array.join?
+  }
+  // format message to read as below.
+  //    The languages spoken in <country name> are <language array string>
+  //    * Not an official language / spoken in some parts of the country
 }
 
 function extractTime(){
-  console.log("Timezone: ", parsedData.timezone.name, "UTC: ", Date.now() ); //iterate array of objs; keys: language & official  ** Use Moment Timezone here ...bring in CDN
-  // **
+  let timezone = parsedData.timezone.name
+  let timestampUTC = Date.now()
+  // use Moment Timezone here ...bring in CDN
+  //    <timezone> (GMT <GMT TIME ie. +08:00>)
+  //    That makes the current date and time <date>, <time>
 }

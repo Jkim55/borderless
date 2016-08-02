@@ -9,26 +9,66 @@ function buildSection2() {
 }
 
 function extractTravelAdvisories() {
-  console.log("Travel Advisories: ", parsedData.advise); // Object of objs with key (country ISO2) and values of an parsedData that has keys of advise & URL (will want to correlate with ISO- http://country.io/names.json)
+  console.log("Travel Advisories: ", parsedData.advise);
+  // Will want to correlate with ISO- http://country.io/names.json)
+  // OBJ looks like this... must iterate thru the OBJ to pull data value, which is a nested obj
+  //     {ISO2: {
+  //       advise: "<!-- START adv-taiwan -->Exercise normal security precautions<!-- END adv-taiwan -->"
+  //       url: "http://travel.gc.ca/destinations/taiwan"
+  //       }
+  //     }
+
+  // Message to look like:
+  //     <message from ISO2.advice>
+  //     Issued by <country name>
+  //     Full report <href to url>
+
 }
 
 function extractVaccinations() {
-  console.log("Vaccinations required: ", parsedData.vaccinations); //iterate thru array of obj; keys: message & name
+  let vaccinationArr = parsedData.vaccinations
+  for(let vaccination in vaccinationArr){
+    console.log(vaccinationArr[vaccination].name)
+    console.log(vaccinationArr[vaccination].message)
+  }
 }
 
 function extractWaterDrinkability() {
-  console.log("Water Drinkability Advisement: ", parsedData.water.short);
+  let waterDrinkability = parsedData.water.short)
+  // string to format as: "Drinking tap water in <country name> is <waterDrinkability>"
+  // create a rule - if null, then display default:
+  // "Unfortunately we do not have information about tap water in Taiwan"
 }
 
 function extractPhone() {
-  console.log("Country code: ", parsedData.telephone.calling_code);
-  console.log("Police: ", parsedData.telephone.police);
+  let countryCode = parsedData.telephone.calling_code;
+  let police = parsedData.telephone.police;
 }
 
 function extractCurrency(){
-  console.log("Currency: ", parsedData.currency.name, parsedData.currency.symbol, parsedData.currency.rate, parsedData.currency.compare[151].name, parsedData.currency.compare[151].rate) //iterate thru parsedData; keys: name, symbol, rate
+  let currencyName =  parsedData.currency.name
+  let currencySymbol = parsedData.currency.symbol
+  let currencyRate = parsedData.currency.rate
+  let usDollarRate = 1
+  // create a input field
+  // Format string to read:
+  //     The currency in <country name> is <currency name> (<currency symbol>)
+  //     Rate of exchange for <input field> <currency name> is <automatically calculated> in US Dollars
 }
 
 function extractElectricity() {
-  console.log("Electrical: ", parsedData.electricity) //iterate thru parsedData; keys: voltage, frequency, plugs
+  let electricalInfo = parsedData.electricity //iterate thru parsedData; keys: voltage, frequency, plugs
+  let voltage = electricalInfo.voltage
+  let frequency = electricalInfo.frequency
+  let plugsArr = []
+  for(let plug in electricalInfo.plugs){
+    plugsArr.push(electricalInfo.plugs[plug])
+  }
+  plugsArr = plugsArr.join(" / ")
+
+  // Display info in the following way:
+  // Electrical Standards
+  //     Voltage: <voltage> V
+  //     Frequency: <frequency> Hz
+  //     Power sockets: type <>
 }
