@@ -9,9 +9,8 @@ $(function loadPage() {
     parsedData = JSON.parse(data);
     buildSection1()
     buildSection2()
-    // buildSection3(data)
-    // buildSection4(data)
-
+    // buildSection3()
+    // buildSection4()
   })
 })
 

@@ -1,1 +1,1 @@
-// handles building current events stufffffff
+// handles building current events shizzzz
