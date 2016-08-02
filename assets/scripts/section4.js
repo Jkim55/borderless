@@ -1,0 +1,1 @@
+// handles building translation widget
