@@ -1,24 +1,20 @@
 // GLOBAL VARIABLES
 let parsedData;  // instatiated so that parsedData can hold value of promise from CONTROLLER FUNCTION
-localStorage.getItem("selectedCountry")
-// MASTER CONTROLLER FUNCTION: onClick re Let's Go Button:index
-$("#submit").click((event)=>{
-  event.preventDefault()             // prevents button from navigating away from page
+
+// MASTER CONTROLLER FUNCTION: load all info on page
+$(function loadPage() {
   let jsonURL = getCountryJSON()     // assigns result of getCountryJSON to variable
   getRequestJSON(jsonURL)            // passes in result from prior line to getRequestJSON
   .then((data)=>{                    // promise: take data from prior line and assign it to gVariable
-    // parsed json object (is this the only hit to the api? or does it call multiple time for lines 24 - 31)
-    // parseJSON(JSON.parse(data))
     parsedData = JSON.parse(data);
     parseJSONSection1(data)
     parseJSONSection2(data)
   })
 })
 
-
 // FUNCTION: returns formatted url to a single country's JSON
 function getCountryJSON(){
-  let countryName = $('#searchBox').val()
+  let countryName =   localStorage.getItem("selectedCountry")
   countryName = countryName.replace(/ /g, "_");
   var countryURL = "https://galvanize-cors-proxy.herokuapp.com/https://travelbriefing.org/"+countryName+"?format=json";
   return countryURL

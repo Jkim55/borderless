@@ -5,11 +5,14 @@ let countryNames = []
 $(function prePopulate() {
   for (let country in allCountries_JSON)
   countryNames.push(allCountries_JSON[country].name)
-
   $("#searchBox").autocomplete({
     source: countryNames
   })
 })
 
-
-//@ some event - grab value in textbox & localStorage.setitem("selectedCountry", "<value>")
+// FUNCTION: onClick "#submit", do (1-3)
+$("#submit").click((event)=>{
+  event.preventDefault()                                          // (1)prevent default
+  localStorage.setItem("selectedCountry", $("#searchBox").val()) // (2)save value in textbox to localStorage
+  $(location).attr("href", "selectedCountry.html")                      // (3) navigate to country page
+})
