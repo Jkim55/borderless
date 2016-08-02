@@ -63,9 +63,19 @@ function extractLanguage(){
 function extractTime(){
   let timezone = parsedData.timezone.name
   let timestampUTC = Date.now()
-  // use js built in Date methods
-  // use Moment Timezone here ...bring in CDN
-  //    <timezone> (GMT <GMT TIME ie. +08:00>)
-  //    That makes the current date and time <date>, <time>
 
 }
+
+// Google Timezone API: Long, Lat, TimeStamp (TimeStamp = Date.now()/1000), API Key
+// Grab from Google Timezone API:   dstOffset & rawOffset
+// then calc offset. offset = (dstOffset - rawOffset)
+
+// function calcTime(offset) {
+//     var d = new Date();
+//     var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+//     var nd = new Date(utc + (1000*offset));
+//     var timeOutput = nd.toLocaleString();
+// }
+
+//    <coutry name> is in the <timezone> timezone.
+//    The local time is <timeOutput>
