@@ -3,6 +3,7 @@ let countryNames = []
 
 // FUNCTION: consumes travelbriefing's all-countries JSON & prepopulate search options for search box:index
 $(function prePopulate() {
+  localStorage.clear()
   for (let country in allCountries_JSON)
   countryNames.push(allCountries_JSON[country].name)
   $("#searchBox").autocomplete({

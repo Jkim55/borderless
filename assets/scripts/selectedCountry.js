@@ -5,10 +5,13 @@ let parsedData;  // instatiated so that parsedData can hold value of promise fro
 $(function loadPage() {
   let jsonURL = getCountryJSON()     // assigns result of getCountryJSON to variable
   getRequestJSON(jsonURL)            // passes in result from prior line to getRequestJSON
-  .then((data)=>{                    // promise: take data from prior line and assign it to gVariable
+  .then((data)=>{                    // promise: take data & assign it to globalV
     parsedData = JSON.parse(data);
-    // buildSection1(data)
-    // buildSection2(data)
+    buildSection1()
+    buildSection2()
+    // buildSection3(data)
+    // buildSection4(data)
+
   })
 })
 

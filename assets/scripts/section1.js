@@ -1,31 +1,29 @@
 // CONTROLLER FUNCTION: triggers helper(?) functions that parses single country's JSON
-function buildSection1(obj) {
+function buildSection1() {
   extractName()
-  //add flag: "http://www.geonames.org/flags/x/" + (obj["names"]["iso2"]) + ".gif"
+  appendFlag()
   extractMap()
   extractLanguage()
   extractTime()
-  extractCurrency()
-  extractElectricity()
 }
 
 function extractName(){
-  console.log("name: ", obj.names.name)
-  console.log("full name: ", obj.names.full)
+  console.log("name: ", parsedData.names.name)
+  console.log("full name: ", parsedData.names.full)
 }
 
+function appendFlag(){
+  //add flag: "http://www.geonames.org/flags/x/" + (parsedData["names"]["iso2"]) + ".gif"
+}
 function extractMap(){
-  console.log(obj.maps.lat, obj.maps.long, obj.maps.zoom) //iterate thru obj; keys: lat, long, zoom
+  console.log("Lat: ", parsedData.maps.lat,"Long: ", parsedData.maps.long,"Zoom: ", parsedData.maps.zoom) //iterate thru parsedData; keys: lat, long, zoom
 }
 
 function extractLanguage(){
-  console.log("Array of languages: ", obj.language); //iterate array of objs; keys: language & official
+  console.log("Array of languages: ", parsedData.language); //iterate array of objs; keys: language & official
 }
 
-function extractCurrency(){
-  console.log("Currency: ", obj.currency.name, obj.currency.symbol, obj.currency.rate, obj.currency.compare[151].name, obj.currency.compare[151].rate) //iterate thru obj; keys: name, symbol, rate
-}
-
-function extractElectricity() {
-  console.log("Electrical: ", obj.electricity) //iterate thru obj; keys: voltage, frequency, plugs
+function extractTime(){
+  console.log("Timezone: ", parsedData.timezone.name, "UTC: ", Date.now() ); //iterate array of objs; keys: language & official  ** Use Moment Timezone here ...bring in CDN
+  // **
 }
