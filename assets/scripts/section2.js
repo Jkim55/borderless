@@ -9,7 +9,12 @@ function buildSection2() {
 }
 
 function extractTravelAdvisories() {
-  console.log("Travel Advisories: ", parsedData.advise)
+  let travelAdviceObj = parsedData.advise
+  for(let travelAdvice in travelAdviceObj){
+    let div = $("<div>");
+    div.append(travelAdviceObj[travelAdvice].advise, travelAdviceObj[travelAdvice].url)
+    $("#sec2").append(div);
+  }
   // Will want to correlate with ISO- http://country.io/names.json)
   // OBJ looks like this... must iterate thru the OBJ to pull data value, which is a nested obj
   //     {ISO2: {
@@ -27,8 +32,9 @@ function extractTravelAdvisories() {
 function extractVaccinations() {
   let vaccinationArr = parsedData.vaccinations
   for(let vaccination in vaccinationArr){
-    console.log(vaccinationArr[vaccination].name)
-    console.log(vaccinationArr[vaccination].message)
+    let div = $("<div>");
+    div.append(vaccinationArr[vaccination].name, vaccinationArr[vaccination].message)
+    $("#sec2").append(div);
   }
 }
 
@@ -40,12 +46,22 @@ function extractWaterDrinkability() {
   } else {
     waterOutput = "Drinking tap water in " + countryName + " is " + waterDrinkability
   }
-  return waterOutput
+  let div = $("<div>");
+  div.append(waterOutput)
+  $("#sec2").append(div);
 }
 
 function extractPhone() {
   let countryCode = parsedData.telephone.calling_code
   let police = parsedData.telephone.police
+
+  let div1 = $("<div>");
+  div1.append(countryCode)
+  $("#sec2").append(div1);
+
+  let div = $("<div>");
+  div.append(police)
+  $("#sec2").append(div);
 }
 
 function extractCurrency(){
@@ -54,6 +70,10 @@ function extractCurrency(){
   let currencyRate = parsedData.currency.rate
   let usDollarRate = 1
   let exchangeRate = usDollarRate/currencyRate
+
+  let div = $("<div>");
+  div.append(currencyName, currencySymbol, currencyRate)
+  $("#sec2").append(div);
 
   // Format string to read:
   //     The currency in <country name> is <currency name> (<currency symbol>)
@@ -70,6 +90,21 @@ function extractElectricity() {
   }
   plugsArr = plugsArr.join(" / ")
 
+  let div = $("<div>");
+  div.append(electricalInfo)
+  $("#sec2").append(div);
+
+  let div1 = $("<div>");
+  div1.append(voltage)
+  $("#sec2").append(div1);
+
+  let div2 = $("<div>");
+  div2.append(frequency)
+  $("#sec2").append(div2);
+
+  let div3 = $("<div>");
+  div3.append(plugsArr)
+  $("#sec2").append(div3);
   // Display info in the following way:
   // Electrical Standards
   //     Voltage: <voltage> V
