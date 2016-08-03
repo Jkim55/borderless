@@ -3,43 +3,21 @@ body {
   background-color: black;
   background-size:cover;
   min-width: 100vh;
-  color: black;
 }
 
-p {
-  margin: 0 0 10px 0;
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 95%;
 }
 
-#logo {
-  display: flex;
-  justify-content: flex-end;
-  align-items: baseline;
-}
-#logo h3{
-  display: block;
+#tabnav {
+  background-color: rgba(219, 219, 219, 0.55);
+  margin:25 0 25 0;
 }
 
-.vertical_center{
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  letter-spacing: 3px
-}
-
-/*.vertical_center>*{
-  display: block;
-}*/
-
-.btn_margin {
-  margin-bottom: 150px
-}
-
-.btn_submit {
-  padding: 15px 0 15px 0;
-}
-
-footer>a{
-  align-content: flex-end;
-  justify-content: flex-end;
-  color: white;
+h4 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  /*color:orange;*/
 }

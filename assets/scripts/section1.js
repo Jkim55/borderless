@@ -16,7 +16,17 @@ function buildSection1() {
 function extractName(){
   let shortName = parsedData.names.name
   let fullName = parsedData.names.full
-  // append two tags
+
+  let div = $("<div>");
+  div.append(shortName)
+  $("#sec1").append(div);
+
+  let div2 = $("<div>");
+  div2.append(fullName)
+  $("#sec1").append(div2);
+
+  // $('#sec1').append(shortName)
+  // $('#official').append(fullName)
 }
 
 function extractCapital(){
@@ -27,15 +37,20 @@ function extractCapital(){
     if (capitalISOPairs.hasOwnProperty(iso2)){
       capital = capitalISOPairs[iso2]
     }
-    return capital
+    let div = $("<div>");
+    div.append(capital)
+    $("#sec1").append(div);
   })
-  // append capital
 }
 
 function appendFlag(){
   let iso2Flag = parsedData.names.iso2.toLowerCase()
   let flagURL = "http://www.geonames.org/flags/x/" + iso2Flag  + ".gif"
   // append src to flag img
+  let flag = $("<img>")
+  flag.attr("src", flagURL)
+  flag.attr("height","125px")
+  $("#sec1").append(flag)
 }
 
 function extractMap(){
@@ -58,6 +73,10 @@ function extractLanguage(){
   }
   languageOutput.splice(languageOutput.length-1,0,'and')
   languageOutput = languageOutput.join(', ')
+
+  let div = $("<div>");
+  div.append(languageOutput)
+  $("#sec1").append(div);
   // put languageOutput into the message as per below
 
   // format message to read as below.
@@ -82,8 +101,10 @@ function getTZData(){
     localOffset = data.dstOffset + data.rawOffset
     localTZName = data.timeZoneName
     localTime = calcTime(localOffset)
+    let div = $("<div>");
+    div.append(localTime)
+    $("#sec1").append(div);
   })
-  console.log(localTime)
 }
 
 function calcTime(offset) {
