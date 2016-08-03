@@ -1,14 +1,14 @@
 // GLOBAL VARIABLE
 let countryLat
 let countryLong
-
+let countryZoom
 
 // CONTROLLER FUNCTION: triggers helper(?) functions that parses single country's JSON
 function buildSection1() {
   extractName()
   extractCapital()
   appendFlag()
-  extractMap()
+  extractMapCoordinates()
   extractLanguage()
   extractTime()
 }
@@ -24,9 +24,6 @@ function extractName(){
   let div2 = $("<div>");
   div2.append(fullName)
   $("#sec1").append(div2);
-
-  // $('#sec1').append(shortName)
-  // $('#official').append(fullName)
 }
 
 function extractCapital(){
@@ -46,20 +43,46 @@ function extractCapital(){
 function appendFlag(){
   let iso2Flag = parsedData.names.iso2.toLowerCase()
   let flagURL = "http://www.geonames.org/flags/x/" + iso2Flag  + ".gif"
-  // append src to flag img
   let flag = $("<img>")
   flag.attr("src", flagURL)
   flag.attr("height","125px")
   $("#sec1").append(flag)
+  // append src to flag img
 }
 
-function extractMap(){
-  countryLat = parsedData.maps.lat
-  countryLong = parsedData.maps.long
-  let zoom = parsedData.maps.zoom
-  // use lat, long, zoom to create GoogMaps view
-  // see googleMapTest.html re example from GoogleMapsAPI
+
+function extractMapCoordinates(){
+  countryLat = parseFloat(parsedData.maps.lat)
+  countryLong = parseFloat(parsedData.maps.long)
+  countryZoom = parseFloat(parsedData.maps.zoom)
+  // addGoogMapsSRC()
+  // console.log($("#key"));
 }
+
+// function addGoogMapsSRC (){
+//   let mapsKey = 'https://maps.googleapis.com/maps/api/js?key='+ googKey + '&callback=initMap'
+//   $("#key").attr('src', mapsKey)
+// }
+
+// function initMap() {
+//   var mapDiv = document.getElementById('map');
+//   var map = new google.maps.Map(mapDiv, {
+//       center: {lat: countryLat, lng: countryLong},
+//       zoom: countryZoom
+//   });
+// }
+
+function initMap() {
+  var mapDiv = document.getElementById('map');
+  var map = new google.maps.Map(mapDiv, {
+      center: {lat: 44.540, lng: -78.546},
+      zoom: 8
+  });
+}
+
+$('#generalInfo').click(()=>{
+  setTimeout(initMap, 0)
+})
 
 function extractLanguage(){
   let languageArr = parsedData.language
@@ -77,40 +100,41 @@ function extractLanguage(){
   let div = $("<div>");
   div.append(languageOutput)
   $("#sec1").append(div);
-  // put languageOutput into the message as per below
-
   // format message to read as below.
-  //    The languages spoken in <country name> are <languageOutput>
+  //    The languages spoken in <country name> are:
+  //    append ul list
   //    * Not an official language
 }
 
 function extractTime(){
-  let localOffset
-  let localTZName
   getTZData()
+  .then((data)=>{
+    let localOffset = data.dstOffset + data.rawOffset
+    let localTZName = data.timeZoneName
+    let localTime = calcTime(localOffset)  // need to return localTime to do the below .then
+    if (localTime === "Invalid Date"){
+      localTime = "Sorry, the current time and date is not available"
+    }
+    // if data from .then === {status: "ZERO_RESULTS"} display error message
+    let div = $("<div>");      // can pull this out as a .then(append(id, item){})
+    div.append(localTime)
+    $("#sec1").append(div);
+  })
   //    <coutry name> is in the <timezone> timezone.
   //    The local time is <timeOutput>
 }
 
+// HELPER FUNCTION to extractTime()
 function getTZData(){
-  let localTime
-  let timestampUTC = Date.now()/1000
-  let googTZapiURL = "https://maps.googleapis.com/maps/api/timezone/json?location=" + countryLat + "," + countryLong + "&timestamp=" + timestampUTC + "&key=" + googTimeZoneKey
-  $.get(googTZapiURL)
-  .then((data)=>{
-    localOffset = data.dstOffset + data.rawOffset
-    localTZName = data.timeZoneName
-    localTime = calcTime(localOffset)
-    let div = $("<div>");
-    div.append(localTime)
-    $("#sec1").append(div);
-  })
+  let timeStampUTC = Date.now()/1000
+  let googTZapiURL = "https://maps.googleapis.com/maps/api/timezone/json?location=" + countryLat + "," + countryLong + "&timestamp=" + timeStampUTC + "&key=" + googKey
+  return $.get(googTZapiURL)
 }
-
+// HELPER FUNCTION to extractTime()
 function calcTime(offset) {
-  var d = new Date();
-  var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-  var nd = new Date(utc + (1000*offset));
-  var timeOutput = nd.toLocaleString();
+  let d = new Date();
+  let utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+  let nd = new Date(utc + (1000*offset));
+  let timeOutput = nd.toLocaleString();
   return timeOutput
 }

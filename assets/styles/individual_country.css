@@ -21,3 +21,9 @@ h4 {
   font-weight: 500;
   /*color:orange;*/
 }
+
+#map {
+  width: 100%;
+  height: 400px;
+  width: 800px;
+}
