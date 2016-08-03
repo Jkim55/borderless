@@ -1,3 +1,8 @@
+// GLOBAL VARIABLE
+let countryLat
+let countryLong
+
+
 // CONTROLLER FUNCTION: triggers helper(?) functions that parses single country's JSON
 function buildSection1() {
   extractName()
@@ -22,6 +27,7 @@ function extractCapital(){
     if (capitalISOPairs.hasOwnProperty(iso2)){
       capital = capitalISOPairs[iso2]
     }
+    return capital
   })
   // append capital
 }
@@ -33,8 +39,8 @@ function appendFlag(){
 }
 
 function extractMap(){
-  let lat = parsedData.maps.lat
-  let long = parsedData.maps.long
+  countryLat = parsedData.maps.lat
+  countryLong = parsedData.maps.long
   let zoom = parsedData.maps.zoom
   // use lat, long, zoom to create GoogMaps view
   // see googleMapTest.html re example from GoogleMapsAPI
@@ -59,23 +65,31 @@ function extractLanguage(){
   //    * Not an official language
 }
 
-
 function extractTime(){
-  let timezone = parsedData.timezone.name
-  let timestampUTC = Date.now()
-
+  let localOffset
+  let localTZName
+  getTZData()
+  //    <coutry name> is in the <timezone> timezone.
+  //    The local time is <timeOutput>
 }
 
-// Google Timezone API: Long, Lat, TimeStamp (TimeStamp = Date.now()/1000), API Key
-// Grab from Google Timezone API:   dstOffset & rawOffset
-// then calc offset. offset = (dstOffset - rawOffset)
+function getTZData(){
+  let localTime
+  let timestampUTC = Date.now()/1000
+  let googTZapiURL = "https://maps.googleapis.com/maps/api/timezone/json?location=" + countryLat + "," + countryLong + "&timestamp=" + timestampUTC + "&key=" + googTimeZoneKey
+  $.get(googTZapiURL)
+  .then((data)=>{
+    localOffset = data.dstOffset + data.rawOffset
+    localTZName = data.timeZoneName
+    localTime = calcTime(localOffset)
+  })
+  console.log(localTime)
+}
 
-// function calcTime(offset) {
-//     var d = new Date();
-//     var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-//     var nd = new Date(utc + (1000*offset));
-//     var timeOutput = nd.toLocaleString();
-// }
-
-//    <coutry name> is in the <timezone> timezone.
-//    The local time is <timeOutput>
+function calcTime(offset) {
+  var d = new Date();
+  var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+  var nd = new Date(utc + (1000*offset));
+  var timeOutput = nd.toLocaleString();
+  return timeOutput
+}

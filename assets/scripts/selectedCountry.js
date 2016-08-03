@@ -1,6 +1,6 @@
 // GLOBAL VARIABLES
-let parsedData;  // instatiated so that parsedData can hold value of promise from CONTROLLER FUNCTION
 let countryName = localStorage.getItem("selectedCountry")
+let parsedData
 
 // MASTER CONTROLLER FUNCTION: load all info on page
 $(function loadPage() {
