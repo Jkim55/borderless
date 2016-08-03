@@ -19,8 +19,7 @@ function extractTravelAdvisories() {
   //     }
 
   // Message to look like:
-  //     <message from ISO2.advice>
-  //     Issued by <country name>
+  //     <message from ISO2.advice> issued by <iso2 countryname>
   //     Full report <href to url>
 
 }
@@ -35,9 +34,13 @@ function extractVaccinations() {
 
 function extractWaterDrinkability() {
   let waterDrinkability = parsedData.water.short
-  // string to format as: "Drinking tap water in <country name> is <waterDrinkability>"
-  // create a rule - if null, then display default:
-  // "Unfortunately we do not have information about tap water in Taiwan"
+  let waterOutput
+  if (waterDrinkability === null){
+    waterOutput = "No advisements exists regarding tap water in " + countryName
+  } else {
+    waterOutput = "Drinking tap water in " + countryName + " is " + waterDrinkability
+  }
+  return waterOutput
 }
 
 function extractPhone() {
@@ -50,7 +53,8 @@ function extractCurrency(){
   let currencySymbol = parsedData.currency.symbol
   let currencyRate = parsedData.currency.rate
   let usDollarRate = 1
-  // create a input field
+  let exchangeRate = usDollarRate/currencyRate
+
   // Format string to read:
   //     The currency in <country name> is <currency name> (<currency symbol>)
   //     Rate of exchange for <input field> <currency name> is <automatically calculated> in US Dollars

@@ -6,14 +6,23 @@ body {
   color: white;
 }
 
-
-#logo {
-  display: flex;
-  justify-content: flex-end;
-  align-items: baseline;
+header {
+  text-align: right;
+  margin-right: 15px;
+  margin-top: 15px;
 }
+
+header>*{
+  display: inline;
+}
+
 #logo h3{
-  display: block;
+}
+
+#submit{
+  background-color: gray;
+  width: 350px;
+
 }
 
 div>p {
@@ -21,15 +30,11 @@ div>p {
 }
 
 .vertical_center{
-  min-height: 100vh;
+  min-height: 88vh;
   display: flex;
   align-items: center;
   letter-spacing: 3px
 }
-
-/*.vertical_center>*{
-  display: block;
-}*/
 
 .btn_margin {
   margin-bottom: 150px

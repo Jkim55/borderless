@@ -1,5 +1,6 @@
 // GLOBAL VARIABLES
-let parsedData;  // instatiated so that parsedData can hold value of promise from CONTROLLER FUNCTION
+let countryName = localStorage.getItem("selectedCountry")
+let parsedData
 
 // MASTER CONTROLLER FUNCTION: load all info on page
 $(function loadPage() {
@@ -16,8 +17,7 @@ $(function loadPage() {
 
 // FUNCTION: returns formatted url to a single country's JSON
 function getCountryJSON(){
-  let countryName =   localStorage.getItem("selectedCountry")
-  countryName = countryName.replace(/ /g, "_");
-  var countryURL = "https://galvanize-cors-proxy.herokuapp.com/https://travelbriefing.org/"+countryName+"?format=json";
+  countryNameFormatted = countryName.replace(/ /g, "_");
+  var countryURL = "https://galvanize-cors-proxy.herokuapp.com/https://travelbriefing.org/"+countryNameFormatted+"?format=json";
   return countryURL
 }
