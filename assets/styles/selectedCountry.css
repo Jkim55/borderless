@@ -1,0 +1,53 @@
+body {
+  background: url(../images/asia.jpeg) no-repeat;
+  background-color: black;
+  background-size:cover;
+  min-width: 100vh;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 95%;
+}
+
+#tabnav {
+  background-color: transparent;
+  margin:25 0 25 0;
+}
+
+h4 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 500;
+  /*color:orange;*/
+}
+
+.tabs .tab a{
+  color:black;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.tabs .tab a:hover{
+  color:#ff0000;
+}
+
+.tabs .indicator{
+  background-color:#ff0000;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  width: 700px;
+}
+
+a {
+  color: black;
+}
+
+#header > * {
+  display: inline-block;
+  margin: 15px 15px 45px 0;
+}

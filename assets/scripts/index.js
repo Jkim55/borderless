@@ -17,5 +17,5 @@ $("#submit").click((event)=>{
   event.preventDefault()
   selectedCountryName = $("#searchBox").val()                                            // (1)prevent default
   localStorage.setItem("selectedCountry", selectedCountryName)    // (2)save value in textbox to localStorage
-  $(location).attr("href", "country.html")                  // (3) navigate to country page
+  $(location).attr("href", "selectedCountry.html")                  // (3) navigate to country page
 })
