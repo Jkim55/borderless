@@ -54,32 +54,22 @@ function appendFlag(){
 function extractMapCoordinates(){
   countryLat = parseFloat(parsedData.maps.lat)
   countryLong = parseFloat(parsedData.maps.long)
-  countryZoom = parseFloat(parsedData.maps.zoom)
+  countryZoom = parseFloat(parsedData.maps.zoom-1)
   // addGoogMapsSRC()
-  // console.log($("#key"));
 }
 
 // function addGoogMapsSRC (){
-//   let mapsKey = 'https://maps.googleapis.com/maps/api/js?key='+ googKey + '&callback=initMap'
+//   let mapsKey = 'https://maps.googleapis.com/maps/api/js?key='+googKey+'&callback=initMap'
 //   $("#key").attr('src', mapsKey)
 // }
 
 function initMap() {
-  console.log();
   var mapDiv = document.getElementById('map');
   var map = new google.maps.Map(mapDiv, {
       center: {lat: countryLat, lng: countryLong},
       zoom: countryZoom
   });
 }
-
-// function initMap() {
-//   var mapDiv = document.getElementById('map');
-//   var map = new google.maps.Map(mapDiv, {
-//       center: {lat: 44.540, lng: -78.546},
-//       zoom: 8
-//   });
-// }
 
 $('#generalInfo').click(()=>{
   setTimeout(initMap, 0)
