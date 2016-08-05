@@ -8,53 +8,49 @@ let resultsTravelArt
 // stretch goal - use all 3 or 2
 
 function buildSection3() {
-  console.log('i got hit')
+    fetchEconPolitics()
     fetchTravelArts()
 }
-function fetchTravelArts() {
-  $.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=a04d3cbd56d94daba43213c5277372a6&q=hillary%20clinton,california,fundraiser")
+
+function fetchEconPolitics() {
+  let requestedEndDate = setEndDate()
+  $.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key="+ nyTimesKey + "&q=" + countryName + ",economics,politics" + "&begin_date=" + requestedEndDate + "&sort=newest")
+
   .then((data)=>{
-    console.log(data)
+    console.log(JSON.stringify(data))
   })
-  console.log("I was called- fetchTravelArts")
 }
 
-// function fetchEconPolitics() {
-//   var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-//   url += '?' + $.param({
-//     'api-key': nyTimesKey,
-//     'q': countryName + "economics, politics",
-//     'end_date': "20160701",
-//     'fl': "web_url,source,headline,multimedia"});
-//     $.ajax({
-//       url: url,
-//       method: 'GET',
-//     }).done(function(result) {
-//       resultsEconPolitics = results
-//     }).fail(function(err) {
-//       throw err;
-//     });
+function fetchTravelArts() {
+  let requestedEndDate = setEndDate()
+  console.log(requestedEndDate);
+  console.log(nyTimesKey);
+  console.log(countryName);
+  $.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key="+ nyTimesKey + "&q=" + countryName + ",travel,arts" + "&begin_date=" + requestedEndDate)
+  .then((data)=>{
+    console.log(JSON.stringify(data))
+  })
+}
+
+function setEndDate() {
+  let endDate = new Date()
+  endDate.setDate(endDate.getDate() - 90)
+  endDate = endDate.toISOString().split('T')[0].replace(/-/g, "")
+  return endDate
+}
+
+
+// // NYTIMES Data
+// var newsImages = "https://static01.nyt.com/"
+// let headline = data["response"]["docs"][0]["headline"]["main"]
+// let url = data["response"]["docs"][0]["web_url"]
+// let snippet = data["response"]["docs"][0]["snippet"]
+// let photo = data["response"]["docs"][0]["multimedia"][1]["url"]
+
+
+// function orderedPromises(){
+//   return Promise.resolve();
 // }
-
-  // var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-  // url += '?' + $.param({
-  //   'api-key': nyTimesKey,
-  //   'q': countryName + "travel, arts",
-  //   'end_date': "20160701",
-  //   'fl': "web_url,source,headline,multimedia"});
-  // $.ajax({
-  //   url: 'https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=a04d3cbd56d94daba43213c5277372a6&q=hillary%20clinton,california,fundraiser',
-  //   method: 'GET',
-  // }).done(function(results) {
-  //   resultsTravelArt = results;
-  // }).fail(function(err) {
-  //   throw err;
-  // });
-
-
-function orderedPromises(){
-  return Promise.resolve();
-}
 // function logger(str){
 //   console.log(str)
 // }
