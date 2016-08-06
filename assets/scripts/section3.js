@@ -8,43 +8,42 @@
 
 // handles building current events shizzzz
 function buildSection3() {
-  // nytURL("economy")
+  nytURL("economy", "politics")
   guardianURL("economy", "politics")
+
   // fetchData()
 }
 
-function nytURL(topic) {  // topics to cover (1) economy & politics (2) travel, arts & culture
-  let requestedEndDate = setEndDate()
-  let nytAPIURL= "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key="+ nyTimesKey + "&q=" + countryName + "," + topic + "&begin_date=" + requestedEndDate + "&sort=newest"
-// return nytAPIURL
-  console.log(nytAPIURL)
+function nytURL(topic1, topic2) {  // topics to cover (1) economy & politics (2) travel, arts & culture
+  let requestedEndDate = setEndDate().replace(/-/g, "")  // date formatted as YYYYMMDD
+  let nytAPIURL= "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key="+ nyTimesKey + "&q=" + countryName + "&fq="+topic1+ ","+ topic2 + "&begin_date=" + requestedEndDate + "&sort=newest"
+  return nytAPIURL
 }
 
-function guardianURL(topic1, topic2) { // topics to cover (1) economy & politics (2) travel, arts & culture
+function guardianURL(topic1, topic2) {
   let requestedEndDate = setEndDate()
   let guardianAPIURL='http://content.guardianapis.com/search?q='+ countryName + '%20AND%20('+ topic1 + '%20OR%20' + topic2 + ')&tag=type/article&from-date=' + requestedEndDate + '&api-key=' + guardianKey
-  // return guardianAPIURL
-  console.log(guardianAPIURL)
+  return guardianAPIURL
 }
-var exampleOfGuardianAPIURL='http://content.guardianapis.com/search?q=kenya%20AND%20(economy%20OR%20politics)&tag=type/article&from-date=2016-07-01&api-key='
 
 function setEndDate() {
   let endDate = new Date()
   endDate.setDate(endDate.getDate() - 90)
-  endDate = endDate.toISOString().split('T')[0].replace(/-/g, "")
-  return endDate
+  endDate = endDate.toISOString().split('T')[0]
+  return endDate  // date formatted as YYYY-MM-DD
 }
 
-function fetchData(newsURL) {
-  $.get(newsURL)
-}
+// function fetchData(newsURL) {
+//   $.get(newsURL)
+// }
+//
+// function parseData(){
+//   .then((data)=>{
+//     console.log(data)
+//     console.log(JSON.stringify(data))
+//   })
+// }
 
-function parseData(){
-  .then((data)=>{
-    console.log(data)
-    console.log(JSON.stringify(data))
-  })
-}
 
 // // NYTIMES Data - iterate thru each article returned
 
