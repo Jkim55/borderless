@@ -3,8 +3,8 @@
 
 // handles building current events shizzzz
 function buildSection3() {
-  nytData("economy", "politics")
-  // guardianData("economy", "politics")
+  // nytData("economy", "politics")
+  guardianData("economy", "politics")
 }
 
 function nytData(t1, t2){
@@ -41,47 +41,47 @@ function parseNYTData(newsURL){
   .then((data)=>{
     let articlesArr = data.response.docs  //arr of obj
     for(let index in articlesArr){
-      let headline = articlesArr[index]["headline"]["main"]
-      let articleURL = articlesArr[index]["web_url"]
-      let multimediaCount = articlesArr[index]["multimedia"].length
-      let thumbnailURL = ""
+      let article = articlesArr[index]
+      let headline = article["headline"]["main"]
+      let articleURL = article["web_url"]
+      let multimediaCount = article["multimedia"].length
+      let thumbnailURL = "https://pbs.twimg.com/profile_images/758384037589348352/KB3RFwFm.jpg"
       if(multimediaCount !== 0){
-        thumbnailURL = "https://static01.nyt.com/" + articlesArr[index]["multimedia"][0]["url"] // index[0]: thumbnail-wide
-      } else {
-        thumbnailURL = "https://pbs.twimg.com/profile_images/758384037589348352/KB3RFwFm.jpg"
+        thumbnailURL = "https://static01.nyt.com/" + article["multimedia"][0]["url"] // index[0]: thumbnail-wide
       }
-      let snippet = articlesArr[index]["snippet"]
-      let publishDate = articlesArr[index]["pub_date"]
-      console.log("this is the headline: ", headline);
-      console.log("this is the articleURL: ", articleURL);
-      console.log("this is the snippet: ", snippet);
-      console.log("this is the pubdate: ", publishDate);
-      console.log("this is the thumbnailURL: ", thumbnailURL);
+      let snippet = article["snippet"]
+      let pubDate = article["pub_date"]
+      // console.log("this is the headline: ", headline);
+      // console.log("this is the articleURL: ", articleURL);
+      // console.log("this is the thumbnailURL: ", thumbnailURL);
+      // console.log("this is the snippet: ", snippet);
+      // console.log("this is the pubdate: ", pubDate);  // this needs to run formatPubDate()
     }
-
   })
 }
-// // NYTIMES Data - iterate thru each article returned
-
-
 
 function parseGuardianData(newsURL){
   $.get(newsURL)
   .then((data)=>{
-    // console.log(data);
-    // console.log(JSON.stringify(data))
+    let articlesArr = data.response.results  //arr of obj
+    console.log(data);
+    for(let index in articlesArr){
+      let article = articlesArr[index]
+      let headline = article.webTitle
+      let articleURL = article.webUrl
+      let thumbnailURL = article.fields.thumbnail   // fields is an object
+      let snippet = article.fields.trailText
+      let pubDate = article.webPublicationDate
+      // console.log("this is the headline: ", headline);
+      // console.log("this is the articleURL: ", articleURL);
+      // console.log("this is the thumbnailURL: ", thumbnailURL);
+      // console.log("this is the snippet: ", snippet);
+      // console.log("this is the pubdate: ", pubDate);  // this needs to run formatPubDate()
+    }
   })
 }
-// GUARDIAN Data - iterate thru each article returned
-// let articlesArr = data["response"]["results"]  //arr of obj
 
-// let headline = data["response"]["results"][0]["webTitle"]
-// let url = data["response"]["results"][0]["webUrl"]
-// let thumbnail = data["response"]["results"][0]["fields"]["thumbnail"]   // fields is an object
-// let snippet = data["response"]["results"][0]["fields"]["trailText"]
-// let publishDate = data["response"]["results"][1]["webPublicationDate"]
-
-function formatPublishedDate (date){
+function formatPubDate (date){
   let formattedDate = date.split('T')[0].split('-')
   formattedDate.push(formattedDate.splice(0, 1))
   formattedDate = formattedDate.join("-")
