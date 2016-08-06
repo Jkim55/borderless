@@ -8,8 +8,8 @@
 
 // handles building current events shizzzz
 function buildSection3() {
-  nytURL("economy")
-  // guardianURL("economy", "politics")
+  // nytURL("economy")
+  guardianURL("economy", "politics")
   // fetchData()
 }
 
@@ -20,13 +20,13 @@ function nytURL(topic) {  // topics to cover (1) economy & politics (2) travel, 
   console.log(nytAPIURL)
 }
 
-function guardianURL(topic1, topic2) { // topics to cover (1) economy & politics (2) travel, arts & culture 
+function guardianURL(topic1, topic2) { // topics to cover (1) economy & politics (2) travel, arts & culture
   let requestedEndDate = setEndDate()
   let guardianAPIURL='http://content.guardianapis.com/search?q='+ countryName + '%20AND%20('+ topic1 + '%20OR%20' + topic2 + ')&tag=type/article&from-date=' + requestedEndDate + '&api-key=' + guardianKey
   // return guardianAPIURL
   console.log(guardianAPIURL)
 }
-// var exampleOfGuardianAPIURL='http://content.guardianapis.com/search?q=kenya%20AND%20(economy%20OR%20politics)&tag=type/article&from-date=2016-07-01&api-key=c9d22c79-4372-4306-97ff-09edf0781da6'
+var exampleOfGuardianAPIURL='http://content.guardianapis.com/search?q=kenya%20AND%20(economy%20OR%20politics)&tag=type/article&from-date=2016-07-01&api-key='
 
 function setEndDate() {
   let endDate = new Date()
@@ -38,6 +38,7 @@ function setEndDate() {
 function fetchData(newsURL) {
   $.get(newsURL)
 }
+
 function parseData(){
   .then((data)=>{
     console.log(data)
