@@ -1,13 +1,20 @@
-//***********************   DO NOT PUBLISH KEY!!!!!   ***********************
 // GLOBAL VARIABLES
 
 
 // handles building current events shizzzz
 function buildSection3() {
-  nytURL("economy", "politics")
-  guardianURL("economy", "politics")
+  nytData("economy", "politics")
+  guardianData("economy", "politics")
+}
 
-  // fetchData()
+function nytData(t1, t2){
+  let url = nytURL(t1, t2)
+  parseData(url)
+}
+
+function guardianData(t1, t2){
+  let url = guardianURL(t1, t2)
+  parseData(url)
 }
 
 function nytURL(topic1, topic2) {  // topics to cover (1) economy & politics (2) travel, arts & culture
@@ -29,20 +36,16 @@ function setEndDate() {
   return endDate  // date formatted as YYYY-MM-DD
 }
 
-// function fetchData(newsURL) {
-//   $.get(newsURL)
-// }
-//
-// function parseData(){
-//   .then((data)=>{
-//     console.log(data)
-//     console.log(JSON.stringify(data))
-//   })
-// }
+function parseData(newsURL){
+  $.get(newsURL)
+  .then((data)=>{
+    console.log(data);
+    // console.log(JSON.stringify(data))
+  })
+}
 
 
 // // NYTIMES Data - iterate thru each article returned
-
 // let articlesArr = data["response"]["docs"]  //arr of obj
 // var newsImages = "https://static01.nyt.com/" + photo  // photo of article
 // let headline = data["response"]["docs"][0]["headline"]["main"]
