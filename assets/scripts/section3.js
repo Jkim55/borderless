@@ -46,10 +46,6 @@ function parseData(){
   })
 }
 
-
-
-// var exampleOfGuardianAPIURL='http://content.guardianapis.com/search?q=kenya%20AND%20(economy%20OR%20politics)&tag=type/article&from-date=2016-07-01&api-key=c9d22c79-4372-4306-97ff-09edf0781da6'
-
 // // NYTIMES Data - iterate thru each article returned
 
 // let articlesArr = data["response"]["docs"]  //arr of obj
