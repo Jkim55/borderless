@@ -22,7 +22,7 @@ function parseNYTData(newsURL){
       let thumbnailURL = "https://pbs.twimg.com/profile_images/758384037589348352/KB3RFwFm.jpg"
       if(multimediaCount !== 0){thumbnailURL = "https://static01.nyt.com/" + article["multimedia"][0]["url"]}
       let snippet = article["snippet"]
-      let pubDate = article["pub_date"]
+      let pubDate = formatPubDate(article["pub_date"])
       console.log("this is the headline: ", headline);
       console.log("this is the articleURL: ", articleURL);
       console.log("this is the thumbnailURL: ", thumbnailURL);
@@ -35,7 +35,7 @@ function parseNYTData(newsURL){
 function nytURL() {  // topics to cover (1) economy & politics (2) travel, arts & culture
   let requestedBegDate = setBegDate().replace(/-/g, "")  // date formatted as YYYYMMDD
   let requestedEndDate = setEndDate().replace(/-/g, "")  // date formatted as YYYYMMDD
-  let nytAPIURL= "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key="+ nyTimesKey + "&fq=section_name\:(\"world\") AND headline.search:(\"" + countryName + "\")&facet_field=section_name&facet_filter=true&begin_date=" + requestedBegDate + "&end_date=" + requestedEndDate + "&sort=newest"// + "&fq=glocations:('TURKEY')"
+  let nytAPIURL= "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key="+ nyTimesKey + "&fq=section_name\:(\"world\") AND headline.search:(\"" + countryName + "\")&facet_field=section_name&facet_filter=true&begin_date=" + requestedBegDate + "&end_date=" + requestedEndDate + "&sort=newest"   // + "&fq=glocations:('TURKEY')"
   return nytAPIURL
 }
 
@@ -47,8 +47,10 @@ function guardianData(t1, t2){
 
 function guardianURL(topic1, topic2) {
   let requestedBegDate = setBegDate()
-  let guardianAPIURL='http://content.guardianapis.com/search?q='+ countryName + ' AND ('+ topic1 + '%20OR%20' + topic2 + ')&tag=type/article&show-fields=trailText,thumbnail&from-date=' + requestedBegDate + '&api-key=' + guardianKey
-  return guardianAPIURL
+  let requestedEndDate = setEndDate()
+  let guardianAPIURL="http://content.guardianapis.com/search?q=" + countryName + "&section=global&tag=type/article&show-fields=trailText,thumbnail&to-date="+requestedEndDate+"&from-date="+requestedBegDate +"&order-by=newest&order-date=published&api-key=" + guardianKey
+  // return guardianAPIURL
+  console.log(guardianAPIURL);
 }
 
 function parseGuardianData(newsURL){
@@ -88,7 +90,7 @@ function setEndDate() {
 }
 
 // HELPER FUNCTION: format pubDate in parseData functions
-function formatPubDate (date){
+function formatPubDate(date) {
   let formattedDate = date.split('T')[0].split('-')
   formattedDate.push(formattedDate.splice(0, 1))
   formattedDate = formattedDate.join("-")
