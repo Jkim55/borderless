@@ -33,13 +33,11 @@ function findLangKey(langsToTransArr) {
         console.log(alllanguages_JSON[i].key)
         break;
       } else {
-        i ++
+        i++
       }
     }
   }
 }
-
-
 
 //translates common phrases from english to country's official lang; also takes user input
 // let textToTrans = //userinput ie  en-ru
