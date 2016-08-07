@@ -1,4 +1,4 @@
-// CONTROLLER FUNCTION: triggers helper(?) functions that parses single country's JSON
+// CONTROLLER FUNCTION: triggers helper functions that parses single country's JSON
 function buildSection2() {
   extractTravelAdvisories()
   extractVaccinations()
