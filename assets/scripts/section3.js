@@ -1,6 +1,6 @@
 // CONTROLLER FUNCTION: handles building current events shizzzz
 function buildSection3() {
-  // nytData()
+  nytData()
   guardianData()
 }
 
@@ -11,8 +11,8 @@ function nytData(){
 }
 
 function nytURL() {  // topics to cover (1) economy & politics (2) travel, arts & culture
-  let requestedBegDate = setBegDate().replace(/-/g, "")  // date formatted as YYYYMMDD
-  let requestedEndDate = setEndDate().replace(/-/g, "")  // date formatted as YYYYMMDD
+  let requestedBegDate = setBegDate().replace(/-/g, "")  // YYYYMMDD
+  let requestedEndDate = setEndDate().replace(/-/g, "")  // YYYYMMDD
   let nytAPIURL= "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key="+ nyTimesKey + "&fq=section_name\:(\"world\") AND headline.search:(\"" + countryName + "\")&facet_field=section_name&facet_filter=true&begin_date=" + requestedBegDate + "&end_date=" + requestedEndDate + "&sort=newest"
   return nytAPIURL
 }
@@ -100,6 +100,9 @@ function formatPubDate(date) {
   formattedDate = formattedDate.join("-")
   return formattedDate
 }
+
+// The New York Times API Branding Guide: https://developer.nytimes.com/branding
+// Guardian API Branding Guide: https://www.theguardian.com/open-platform/logos
 
 // Because you need to put the URL inside an image tag, which look like this...
 // <img src='http://some.url/image.jpg' />

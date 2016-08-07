@@ -2,6 +2,7 @@
 let countryLat
 let countryLong
 let countryZoom
+let languageArr
 
 // CONTROLLER FUNCTION: triggers helper(?) functions that parses single country's JSON
 function buildSection1() {
@@ -76,7 +77,7 @@ $('#generalInfo').click(()=>{
 })
 
 function extractLanguage(){
-  let languageArr = parsedData.language
+  languageArr = parsedData.language
   let languageOutput = []  // might change to array
   for(let language in languageArr){
     if(languageArr[language].official === 'Yes'){
@@ -129,3 +130,7 @@ function calcTime(offset) {
   let timeOutput = nd.toLocaleString();
   return timeOutput
 }
+
+// travelbriefing.org Branding
+// Google Maps Branding
+// Google TimeZone Branding

@@ -2,6 +2,8 @@
 let countryName = localStorage.getItem("selectedCountry")
 let parsedData
 
+
+
 // MASTER CONTROLLER FUNCTION: load all info on page
 $(function loadPage() {
   let jsonURL = getCountryJSON()     // assigns result of getCountryJSON to variable
@@ -10,8 +12,8 @@ $(function loadPage() {
     parsedData = JSON.parse(data);
     buildSection1()
     buildSection2()
-    buildSection3()
-    // buildSection4()
+    // buildSection3()
+    buildSection4()
   })
 })
 
