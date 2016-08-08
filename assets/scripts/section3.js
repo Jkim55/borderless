@@ -39,6 +39,9 @@ function parseNYTData(newsURL){
       console.log("this is the pubdate: ", pubDate);  // this needs to run thru formatPubDate()
     }
   })
+  .catch((error)=> {
+    console.error(error)
+  })
 }
 
 // HELPER FUNCTION: takes in guardianURL() and parseGuardianData() to output results from NYT
@@ -75,6 +78,9 @@ function parseGuardianData(newsURL){
       console.log("this is the snippet: ", snippet);
       console.log("this is the pubdate: ", pubDate);  // this needs to run thru formatPubDate()
     }
+  })
+  .catch((error)=> {
+    console.error(error)
   })
 }
 

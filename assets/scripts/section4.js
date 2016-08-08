@@ -20,8 +20,8 @@ function identifyOfficialLang() {
   return langsToTrans
 }
 
-function createLabels() {
-  
+function createLabels() { //label for language name 
+
 }
 
 function findLangKey(langsToTransArr) {
@@ -69,6 +69,9 @@ $("#transBtn").click((event)=>{
     let $div = $("<div>");
     $div.append("translated to: ", phrase)
     $("#results").append($div);
+    })
+    .catch((error)=> {
+      console.error(error)
     })
   }
 })

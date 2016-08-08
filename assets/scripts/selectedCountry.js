@@ -8,12 +8,16 @@ let parsedData
 $(function loadPage() {
   let jsonURL = getCountryJSON()     // assigns result of getCountryJSON to variable
   $.get(jsonURL)                     // passes in result from prior line to getRequestJSON
-  .then((data)=>{                    // promise: take data & assign it to globalV
+  .then((data)=> {                    // promise: take data & assign it to globalV
     parsedData = JSON.parse(data);
+    setTimeout(initMap, 1000)
     buildSection1()
     buildSection2()
-    // buildSection3()
+    buildSection3()
     buildSection4()
+  })
+  .catch((error)=> {
+    console.error(error)
   })
 })
 

@@ -30,17 +30,17 @@ h4 {
 }
 
 .tabs .tab a:hover{
-  color:#ff0000;
+  color:rgb(255, 0, 0);
 }
 
 .tabs .indicator{
-  background-color:#ff0000;
+  background-color:rgb(255, 0, 0);
 }
 
 #map {
-  width: 100%;
+  width: 600px;
   height: 400px;
-  width: 700px;
+  margin: 45px 25px 0 25px;
 }
 
 a {
@@ -50,4 +50,27 @@ a {
 #header > * {
   display: inline-block;
   margin: 15px 15px 45px 0;
+}
+
+
+.sContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0 0 0;
+  background-color:rgba(225, 225, 225, 0.6);
+  height: 490px;
+}
+
+.sContainer > div {
+  flex-direction: row;
+  align-content: space-between;;
+  padding: 15px 15px 15px 15px;
+}
+
+.s1info {
+  background-color:rgba(224, 222, 222, 0.6);
+}
+
+#shortName {
+  margin-top: 20px;
 }

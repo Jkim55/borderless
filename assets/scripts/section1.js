@@ -17,14 +17,8 @@ function buildSection1() {
 function extractName(){
   let shortName = parsedData.names.name
   let fullName = parsedData.names.full
-
-  let div = $("<div>");
-  div.append(shortName)
-  $("#sec1").append(div);
-
-  let div2 = $("<div>");
-  div2.append(fullName)
-  $("#sec1").append(div2);
+  $("#shortName").append(shortName);
+  $("#fullName").append(fullName);
 }
 
 function extractCapital(){
@@ -35,20 +29,17 @@ function extractCapital(){
     if (capitalISOPairs.hasOwnProperty(iso2)){
       capital = capitalISOPairs[iso2]
     }
-    let div = $("<div>");
-    div.append(capital)
-    $("#sec1").append(div);
+    $("#capital").append(capital);
+  })
+  .catch((error)=> {
+    console.error(error)
   })
 }
 
 function appendFlag(){
   let iso2Flag = parsedData.names.iso2.toLowerCase()
   let flagURL = "http://www.geonames.org/flags/x/" + iso2Flag  + ".gif"
-  let flag = $("<img>")
-  flag.attr("src", flagURL)
-  flag.attr("height","125px")
-  $("#sec1").append(flag)
-  // append src to flag img
+  $("#flag").attr("src", flagURL)
 }
 
 
@@ -56,7 +47,7 @@ function extractMapCoordinates(){
   countryLat = parseFloat(parsedData.maps.lat)
   countryLong = parseFloat(parsedData.maps.long)
   countryZoom = parseFloat(parsedData.maps.zoom-1)
-  // addGoogMapsSRC()
+  // addGoogMapsSRC()  // attempt to hide key
 }
 
 // function addGoogMapsSRC (){
@@ -65,8 +56,8 @@ function extractMapCoordinates(){
 // }
 
 function initMap() {
-  var mapDiv = document.getElementById('map');
-  var map = new google.maps.Map(mapDiv, {
+  let mapDiv = document.getElementById("map");
+  let map = new google.maps.Map(mapDiv, {
       center: {lat: countryLat, lng: countryLong},
       zoom: countryZoom
   });
@@ -88,14 +79,8 @@ function extractLanguage(){
   }
   languageOutput.splice(languageOutput.length-1,0,'and')
   languageOutput = languageOutput.join(', ')
-
-  let div = $("<div>");
-  div.append(languageOutput)
-  $("#sec1").append(div);
-  // format message to read as below.
-  //    The languages spoken in <country name> are:
-  //    append ul list
-  //    * Not an official language
+  $("#langCountry").append(countryName, ": ")
+  $("#langArr").append(languageOutput);
 }
 
 function extractTime(){
@@ -103,17 +88,17 @@ function extractTime(){
   .then((data)=>{
     let localOffset = data.dstOffset + data.rawOffset
     let localTZName = data.timeZoneName
-    let localTime = calcTime(localOffset)  // need to return localTime to do the below .then
+    let localTime = calcTime(localOffset)  // Return localTime to do the below .then
     if (localTime === "Invalid Date"){
       localTime = "Sorry, the current time and date is not available"
     }
-    // if data from .then === {status: "ZERO_RESULTS"} display error message
-    let div = $("<div>");      // can pull this out as a .then(append(id, item){})
-    div.append(localTime)
-    $("#sec1").append(div);
+    // if data === {status: "ZERO_RESULTS"}: display error message
+    $("#timeZone").append(localTZName)
+    $("#localTD").append(localTime);
   })
-  //    <coutry name> is in the <timezone> timezone.
-  //    The local time is <timeOutput>
+  .catch((error)=> {
+    console.error(error)
+  })
 }
 
 // HELPER FUNCTION to extractTime()

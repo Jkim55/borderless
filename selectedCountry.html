@@ -21,7 +21,7 @@
         <ul class="tabs" id="tabnav">
           <li class="tab col s3"><a href="#landing">Landing</a></li>
           <li class="tab col s3" id="generalInfo"><a href="#general">General Info</a></li>
-          <li class="tab col s3"><a href="#visitor">Good to Knows</a></li>
+          <li class="tab col s3"><a href="#visiting">Good to Knows</a></li>
           <li class="tab col s3"><a href="#news">Current Events</a></li>
           <li class="tab col s3"><a href="#translate">Translation</a></li>
         </ul>
@@ -34,13 +34,59 @@
 
       <div id="general" class="col s12">
         <div class="col s12" id="sec1">
-          <h5>Map</h5>
-          <div id="map"></div>
+          <div class="sContainer">
+
+            <div id="s1info">
+              <div class="name">
+                <h1 id="shortName"></h1>
+                <h5 id="fullName"></h5>
+                <p id="capital">Capital: </p>
+              </div>
+
+              <div class="flag">
+                <img id = "flag" src="" height=100px>
+              </div>
+              <br>
+              <div class="currentTimeDate">
+                <span> Local time &#38; date: </span>
+                <span id="localTD"></span>
+              </div>
+
+              <div class="timezone">
+                <span>Timezone: </span>
+                <span id="timeZone"></span>
+              </div>
+              <br>
+              <div class="langs">
+                <span>The language(s) spoken in </span>
+                <span id="langCountry"></span>
+                <div id="langArr"></div>
+                <span>(*) not an official language</span>
+              </div>
+            </div>
+
+            <div id="map"></div>
+          </div>
         </div>
       </div>
 
-      <div id="visitor" class="col s12">
+      <div id="visiting" class="col s12">
         <div class="col s12" id="sec2">
+          <div class="sContainer">
+            <div id="s2info">
+              <div class="preTravel">
+                
+              </div>
+
+              <div class="onLocation">
+
+              </div>
+
+              <div class="currency">
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
