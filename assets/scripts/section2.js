@@ -88,6 +88,7 @@ function extractElectricity() {
   for(let plug in electricalInfo.plugs){
     plugsArr.push(electricalInfo.plugs[plug])
   }
+
   plugsArr = plugsArr.join(" / ")
 
   let div = $("<div>");
@@ -105,9 +106,12 @@ function extractElectricity() {
   let div3 = $("<div>");
   div3.append(plugsArr)
   $("#sec2").append(div3);
-  // Display info in the following way:
-  // Electrical Standards
-  //     Voltage: <voltage> V
-  //     Frequency: <frequency> Hz
-  //     Power sockets: type <>
 }
+
+// Display info in the following way:
+// Electrical Standards
+//     Voltage: <voltage> V
+//     Frequency: <frequency> Hz
+//     Power sockets: type <>
+
+// travelbriefing.org Branding
