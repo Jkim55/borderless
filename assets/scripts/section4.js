@@ -20,6 +20,10 @@ function identifyOfficialLang() {
   return langsToTrans
 }
 
+function createLabels() {
+  
+}
+
 function findLangKey(langsToTransArr) {
   let langPairs = []
   for(let index in langsToTransArr){
@@ -41,10 +45,8 @@ function makeLanguagePairs(langKeys){
   for(key in langKeys){
     langKeys[key] = "en-" + langKeys[key]
   }
-  return langKeys
+  return langKeys                          // langKeys: en-ru
 }
-
-// let textToTrans = //userinput ie  en-ru
 
 // FUNCTION: builds URL for GET request
 function createYandexURLs(pairs) {
@@ -63,11 +65,10 @@ $("#transBtn").click((event)=>{
     .then((data) => {
       return data["text"][0]
     })
-    .then((phrase){
-                                                        // append to dom
+    .then((phrase) => {                                  // (2.3) Append to dom
+    let $div = $("<div>");
+    $div.append("translated to: ", phrase)
+    $("#results").append($div);
     })
   }
 })
-
-
-// twilio to text words?
