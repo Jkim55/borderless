@@ -1,4 +1,4 @@
-// GLOBAL VARIABLE
+// GLOBAL VARIABLES
 let countryLat
 let countryLong
 let countryZoom

@@ -12,10 +12,6 @@ let alllanguages_JSON = [
     "key": "sq"
   },
   {
-    "language": "English",
-    "key": "en"
-  },
-  {
     "language": "Marathi",
     "key": "mr"
   },

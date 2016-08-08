@@ -1,16 +1,13 @@
+// GLOBAL VARIABLES
+let textToTrans
+let yandexURLArr = []
+
 // CONTROLLER FUNCTION: builds translation widget
 function buildSection4() {
-  // accessLangObj()
   var langArray = identifyOfficialLang(languageArr)
-  findLangKey(langArray)
-}
-
-function accessLangObj() {
-  let langKey = []
-  for (let index in allLanguages_JSON ){
-    langKey.push(allLanguages_JSON[index].key)
-  }
-  console.log(langKey);
+  var langKeyArray = findLangKey(langArray)
+  var keyPairs = makeLanguagePairs(langKeyArray);
+  createYandexURLs(keyPairs)
 }
 
 function identifyOfficialLang() {
@@ -24,30 +21,53 @@ function identifyOfficialLang() {
 }
 
 function findLangKey(langsToTransArr) {
+  let langPairs = []
   for(let index in langsToTransArr){
     let language = langsToTransArr[index]
-    // console.log(language);
     let i = 0
     while (i < alllanguages_JSON.length){
       if (alllanguages_JSON[i].language === language){
-        console.log(alllanguages_JSON[i].key)
+        langPairs.push(alllanguages_JSON[i].key)
         break;
       } else {
         i++
       }
     }
   }
+  return langPairs
 }
 
-//translates common phrases from english to country's official lang; also takes user input
+function makeLanguagePairs(langKeys){
+  for(key in langKeys){
+    langKeys[key] = "en-" + langKeys[key]
+  }
+  return langKeys
+}
+
 // let textToTrans = //userinput ie  en-ru
-// let yandexURL = "https://translate.yandex.net/api/v1.5/tr.json/translate?lang=" + langPair + "&key=" + yandexKey + "&text=" + textToTrans
-//
-// function translateText (){
-//   $.get(yandexURL)
-//   .then((data) => {
-//     console.log(data)
-//   })
-// }
+
+// FUNCTION: builds URL for GET request
+function createYandexURLs(pairs) {
+  for(pair in pairs){
+    yandexURLArr.push("https://translate.yandex.net/api/v1.5/tr.json/translate?lang=" + pairs[pair]+ "&key=" + yandexKey + "&text=")
+  }
+}
+
+// FUNCTION: onClick "#translator"    // should this be wrapped in a function? Seems wrong...
+$("#transBtn").click((event)=>{
+  event.preventDefault()
+  textToTrans = $("#translator").val()                   // (1) Capture user input
+  for(let index in yandexURLArr){                        // (2.0) For each url created for every official language
+    let yandexURL = yandexURLArr[index] + textToTrans    // (2.1) Concat URL with userinput (textToTrans)
+    $.get(yandexURL)                                     // (2.2) Trigger GET request
+    .then((data) => {
+      return data["text"][0]
+    })
+    .then((phrase){
+                                                        // append to dom
+    })
+  }
+})
+
 
 // twilio to text words?
