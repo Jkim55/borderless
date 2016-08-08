@@ -4,8 +4,9 @@ function buildSection2() {
   extractVaccinations()
   extractWaterDrinkability()
   extractPhone()
-  extractCurrency()
   extractElectricity()
+  extractCurrencySummary()
+  extractFXWidget()
 }
 
 function extractTravelAdvisories() {
@@ -22,12 +23,10 @@ function extractTravelAdvisories() {
   //       url: "http://travel.gc.ca/destinations/taiwan"
   //       }
   //     }
-
-  // Message to look like:
-  //     <message from ISO2.advice> issued by <iso2 countryname>
-  //     Full report <href to url>
-
 }
+// Message to look like:
+//     <message from ISO2.advice> issued by <iso2 countryname>
+//     Full report <href to url>
 
 function extractVaccinations() {
   let vaccinationArr = parsedData.vaccinations
@@ -42,76 +41,65 @@ function extractWaterDrinkability() {
   let waterDrinkability = parsedData.water.short
   let waterOutput
   if (waterDrinkability === null){
-    waterOutput = "No advisements exists regarding tap water in " + countryName
+    waterOutput = "No advice exists regarding tap water in " + countryName
   } else {
     waterOutput = "Drinking tap water in " + countryName + " is " + waterDrinkability
   }
-  let div = $("<div>");
-  div.append(waterOutput)
-  $("#sec2").append(div);
+  $("#wAdvice").append(waterOutput);
 }
 
 function extractPhone() {
   let countryCode = parsedData.telephone.calling_code
   let police = parsedData.telephone.police
-
-  let div1 = $("<div>");
-  div1.append(countryCode)
-  $("#sec2").append(div1);
-
-  let div = $("<div>");
-  div.append(police)
-  $("#sec2").append(div);
-}
-
-function extractCurrency(){
-  let currencyName =  parsedData.currency.name
-  let currencySymbol = parsedData.currency.symbol
-  let currencyRate = parsedData.currency.rate
-  let usDollarRate = 1
-  let exchangeRate = usDollarRate/currencyRate
-
-  let div = $("<div>");
-  div.append(currencyName, currencySymbol, currencyRate)
-  $("#sec2").append(div);
-
-  // Format string to read:
-  //     The currency in <country name> is <currency name> (<currency symbol>)
-  //     Rate of exchange for <input field> <currency name> is <automatically calculated> in US Dollars
+  if (police === ""){
+    police = "No contact information is provided for the police in " + countryName
+  }
+  $("#cCode").append(countryCode)
+  $("#poPo").append(police);
 }
 
 function extractElectricity() {
-  let electricalInfo = parsedData.electricity //iterate thru parsedData; keys: voltage, frequency, plugs
-  let voltage = electricalInfo.voltage
-  let frequency = electricalInfo.frequency
-  let plugsArr = []
-  for(let plug in electricalInfo.plugs){
-    plugsArr.push(electricalInfo.plugs[plug])
-  }
+  let voltage = parsedData.electricity.voltage
+  let frequency = parsedData.electricity.frequency
+  let sockets = displaySocketInfo()
 
-  plugsArr = plugsArr.join(" / ")
+  // let div1 = $("<div>");
+  // div1.append(voltage)
+  $("#voltage").append(voltage);
 
-  let div = $("<div>");
-  div.append(electricalInfo)
-  $("#sec2").append(div);
+  // let div2 = $("<div>");
+  // div2.append(frequency)
+  $("#frequency").append(frequency);
 
-  let div1 = $("<div>");
-  div1.append(voltage)
-  $("#sec2").append(div1);
-
-  let div2 = $("<div>");
-  div2.append(frequency)
-  $("#sec2").append(div2);
-
-  let div3 = $("<div>");
-  div3.append(plugsArr)
-  $("#sec2").append(div3);
+  // let div3 = $("<div>");
+  // div3.append(sockets)
+  $("#socket").append(sockets);
 }
 
-// Display info in the following way:
-// Electrical Standards
-//     Voltage: <voltage> V
-//     Frequency: <frequency> Hz
-//     Power sockets: type <>
+// HELPER FUNCTION to extractElectricity()
+function displaySocketInfo() {
+  let plugsArr = []
+  for(let plug in parsedData.electricity.plugs){
+    plugsArr.push(parsedData.electricity.plugs[plug])
+  }
+  plugsArr = plugsArr.join(" / ")
+  return plugsArr
+}
+
+function extractCurrencySummary() {
+  let currencyName =  parsedData.currency.name
+  let currencySymbol = parsedData.currency.symbol
+  $("#fxInfo").prepend(countryName);
+  $("#fxInfo").append(currencyName, "(", currencySymbol, ")");
+}
+
+function extractFXWidget() {
+  let currencyRate = parseFloat(parsedData.currency.rate)
+  let fxRate = 1/currencyRate            // fx for 1 USD
+  let $fxCalc = parseFloat($("#fxInput").val())   // (1) Capture user input
+  $fxCalc = parseFloat($fxCalc) * fxRate
+  $("#fxCalculated").append($fxCalc)
+  console.log($fxCalc)
+}
 
 // travelbriefing.org Branding

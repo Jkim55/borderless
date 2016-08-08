@@ -20,7 +20,7 @@ function identifyOfficialLang() {
   return langsToTrans
 }
 
-function createLabels() { //label for language name 
+function createLabels() { //label for language name
 
 }
 

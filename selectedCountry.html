@@ -35,7 +35,6 @@
       <div id="general" class="col s12">
         <div class="col s12" id="sec1">
           <div class="sContainer">
-
             <div id="s1info">
               <div class="name">
                 <h1 id="shortName"></h1>
@@ -64,7 +63,6 @@
                 <span>(*) not an official language</span>
               </div>
             </div>
-
             <div id="map"></div>
           </div>
         </div>
@@ -73,17 +71,59 @@
       <div id="visiting" class="col s12">
         <div class="col s12" id="sec2">
           <div class="sContainer">
-            <div id="s2info">
-              <div class="preTravel">
-                
+            <!-- <div id="s2info"> -->
+            <div class="preTravel">
+              <h5>Travel Advisories</h5>
+              <div class="travelAdvisories">
+                <!-- location for dynamically created t Advisories -->
               </div>
 
-              <div class="onLocation">
-
+              <div class="vaccinationRecs">
+                <h5>Vaccination Recommendations</h5>
+                <!-- location for dynamically created vaccinationRecs -->
               </div>
 
-              <div class="currency">
+              <div class=waterAdvice>
+                <h5>Tap Water Safety</h5>
+                <div id=wAdvice></div>
+              </div>
+            </div>
 
+            <div class="onLocation">
+              <h5>Utilities &#38; Services</h5>
+              <div class="phone">
+                <h6>Phone Numbers</h6>
+                <div id="cCode">Country Code: </div>
+                <div id="poPo">Police: </div>
+              </div>
+              <br>
+              <div class="electical">
+                <h6>Electrical Standards</h6>
+                <div id="voltage">Voltage: </div>
+                <div id="frequency">Frequency: </div>
+                <div id="socket">Socket Type(s): </div>
+              </div>
+            </div>
+
+            <div class="currency">
+              <div class="fxSummary">
+                <span> The currency in </span>
+                <span id=fxInfo> is </span>
+              </div>
+              <div class="fxWidget">
+                <form class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <textarea id="fxInput" class="materialize-textarea"></textarea>
+                      <label for="fxInput"></label>
+                    </div>
+                    <a class="waves-effect waves-light btn" id="fxBtn">Calculate Conversion</a>
+                  </div>
+                </form>
+                <div id="coverted">
+                  <span id=fxCalculated> is equivalant to </span>
+                  <span> US Dollars.</span>
+                </div>
               </div>
             </div>
           </div>
@@ -104,11 +144,10 @@
                   <textarea id="translator" class="materialize-textarea"></textarea>
                   <label for="translator">Input Text for Translation</label>
                 </div>
-                <a class="waves-effect waves-light btn" id="transBtn">button</a>
+                <a class="waves-effect waves-light btn" id="transBtn">Translate Phrase</a>
               </div>
             </form>
-            <div id="results">
-            </div>
+            <div id="results"></div>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ function nytData(){
   parseNYTData(url)
 }
 
-function nytURL() {  // topics to cover (1) economy & politics (2) travel, arts & culture
+function nytURL() {
   let requestedBegDate = setBegDate().replace(/-/g, "")  // YYYYMMDD
   let requestedEndDate = setEndDate().replace(/-/g, "")  // YYYYMMDD
   let nytAPIURL= "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key="+ nyTimesKey + "&fq=section_name\:(\"world\") AND headline.search:(\"" + countryName + "\")&facet_field=section_name&facet_filter=true&begin_date=" + requestedBegDate + "&end_date=" + requestedEndDate + "&sort=newest"

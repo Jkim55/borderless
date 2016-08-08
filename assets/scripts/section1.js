@@ -4,14 +4,14 @@ let countryLong
 let countryZoom
 let languageArr
 
-// CONTROLLER FUNCTION: triggers helper(?) functions that parses single country's JSON
+// CONTROLLER FUNCTION: handles building general info on country
 function buildSection1() {
   extractName()
   extractCapital()
   appendFlag()
   extractMapCoordinates()
-  extractLanguage()
   extractTime()
+  extractLanguage()
 }
 
 function extractName(){
@@ -42,7 +42,7 @@ function appendFlag(){
   $("#flag").attr("src", flagURL)
 }
 
-
+// HELPER FUNCTION to initMap()
 function extractMapCoordinates(){
   countryLat = parseFloat(parsedData.maps.lat)
   countryLong = parseFloat(parsedData.maps.long)
@@ -55,6 +55,7 @@ function extractMapCoordinates(){
 //   $("#key").attr('src', mapsKey)
 // }
 
+// FUNCTION: generates GOOGmaps
 function initMap() {
   let mapDiv = document.getElementById("map");
   let map = new google.maps.Map(mapDiv, {
@@ -66,22 +67,6 @@ function initMap() {
 $('#generalInfo').click(()=>{
   setTimeout(initMap, 0)
 })
-
-function extractLanguage(){
-  languageArr = parsedData.language
-  let languageOutput = []  // might change to array
-  for(let language in languageArr){
-    if(languageArr[language].official === 'Yes'){
-        languageOutput.push(languageArr[language].language)
-    } else {
-      languageOutput.push(languageArr[language].language + '*')
-    }
-  }
-  languageOutput.splice(languageOutput.length-1,0,'and')
-  languageOutput = languageOutput.join(', ')
-  $("#langCountry").append(countryName, ": ")
-  $("#langArr").append(languageOutput);
-}
 
 function extractTime(){
   getTZData()
@@ -107,6 +92,7 @@ function getTZData(){
   let googTZapiURL = "https://maps.googleapis.com/maps/api/timezone/json?location=" + countryLat + "," + countryLong + "&timestamp=" + timeStampUTC + "&key=" + googKey
   return $.get(googTZapiURL)
 }
+
 // HELPER FUNCTION to extractTime()
 function calcTime(offset) {
   let d = new Date();
@@ -115,6 +101,23 @@ function calcTime(offset) {
   let timeOutput = nd.toLocaleString();
   return timeOutput
 }
+
+function extractLanguage(){
+  languageArr = parsedData.language
+  let languageOutput = []  // might change to array
+  for(let language in languageArr){
+    if(languageArr[language].official === 'Yes'){
+        languageOutput.push(languageArr[language].language)
+    } else {
+      languageOutput.push(languageArr[language].language + '*')
+    }
+  }
+  languageOutput.splice(languageOutput.length-1,0,'and')
+  languageOutput = languageOutput.join(', ')
+  $("#langCountry").append(countryName, ": ")
+  $("#langArr").append(languageOutput);
+}
+
 
 // travelbriefing.org Branding
 // Google Maps Branding
