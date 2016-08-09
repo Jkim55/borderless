@@ -6,20 +6,31 @@ let parsedData
 
 // MASTER CONTROLLER FUNCTION: load all info on page
 $(function loadPage() {
-  let jsonURL = getCountryJSON()     // assigns result of getCountryJSON to variable
-  $.get(jsonURL)                     // passes in result from prior line to getRequestJSON
-  .then((data)=> {                    // promise: take data & assign it to globalV
-    localStorage.setItem("countryInfo", data)
+  if (localStorage.getItem("countryInfo") === null) {
+    let jsonURL = getCountryJSON()     // assigns result of getCountryJSON to variable
+    $.get(jsonURL)                     // passes in result from prior line to getRequestJSON
+    .then((data)=> {                    // promise: take data & assign it to globalV
+      localStorage.setItem("countryInfo", data)
+      parsedData = JSON.parse(data);
+      setTimeout(initMap, 0)
+      buildSection1()
+      buildSection2()
+      buildSection3()
+      buildSection4()
+    })
+    .catch((error)=> {
+      console.error(error)
+    })
+  } else {
+    console.log("data from localStorage fetched")
+    let data = localStorage.getItem("countryInfo")
     parsedData = JSON.parse(data);
     setTimeout(initMap, 0)
-    buildSection1()
+    buildSection1()         // how to fadein? .delay(2000).fadeIn(1000)
     buildSection2()
-    // buildSection3()
+    buildSection3()
     buildSection4()
-  })
-  .catch((error)=> {
-    console.error(error)
-  })
+  }
 })
 
 // FUNCTION: returns formatted url to a single country's JSON

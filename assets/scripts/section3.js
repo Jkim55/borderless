@@ -32,11 +32,31 @@ function parseNYTData(newsURL){
         }
       let snippet = article["snippet"]
       let pubDate = formatPubDate(article["pub_date"])
-      console.log("this is the headline: ", headline);
-      console.log("this is the articleURL: ", articleURL);
-      console.log("this is the thumbnailURL: ", thumbnailURL);
-      console.log("this is the snippet: ", snippet);
-      console.log("this is the pubdate: ", pubDate);  // this needs to run thru formatPubDate()
+
+      let $hdLnHREF = $("<a>", {"href": articleURL})
+      let $hdLnText = $("<h6>")
+      let $hdLn =$("<span>")
+      $hdLn.append($hdLnText.append(headline))
+
+      let $pubDate = $("<span>", {"id": "aHdLn"})
+      $pubDate.append("Published: ", pubDate)
+
+      let $snippet = $("<div>")
+      $snippet.append(snippet)
+
+      let $image = $("<img>", {
+        "src": thumbnailURL,
+        "width": "125px",
+        "height":"125px"
+      })
+      let $thumbnail = $("<span>", {"id": "aImg"}).append($image)
+
+      let $article = $("<span>", {"id": "aText"}).append($hdLn).append($pubDate).append($snippet)
+
+      let $articleCard = $("<div>", {"id": "aCard"})
+      $articleCard.prepend($thumbnail).append($article)
+
+      $("#nyt").append($articleCard)
     }
   })
   .catch((error)=> {
@@ -61,7 +81,6 @@ function parseGuardianData(newsURL){
   $.get(newsURL)
   .then((data)=>{
     let articlesArr = data.response.results           //arr of obj
-    console.log(data);
     for(let index in articlesArr){
       let article = articlesArr[index]
       let headline = article.webTitle
@@ -72,11 +91,31 @@ function parseGuardianData(newsURL){
         }
       let snippet = article.fields.trailText
       let pubDate = formatPubDate(article.webPublicationDate)
-      console.log("this is the headline: ", headline);
-      console.log("this is the articleURL: ", articleURL);
-      console.log("this is the thumbnailURL: ", thumbnailURL);
-      console.log("this is the snippet: ", snippet);
-      console.log("this is the pubdate: ", pubDate);
+
+      let $hdLnHREF = $("<a>", {"href": articleURL})
+      let $hdLnText = $("<h6>")
+
+      let $hdLn =$("<span>")
+      $hdLn.append($hdLnText.append(headline))
+
+      let $pubDate = $("<span>", {"id": "aHdLn"})
+      $pubDate.append("Published: ", pubDate)
+
+      let $snippet = $("<div>")
+      $snippet.append(snippet)
+
+      let $image = $("<img>", {
+        "src": thumbnailURL,
+        "width": "125px",
+        "height":"125px"
+      })
+      let $thumbnail = $("<span>", {"id": "aImg"}).append($image)
+      let $article = $("<span>", {"id": "aText"}).append($hdLn).append($pubDate).append($snippet)
+
+      let $articleCard = $("<div>", {"id": "aCard"})
+      $articleCard.prepend($thumbnail).append($article)
+
+      $("#guardian").append($articleCard)
     }
   })
   .catch((error)=> {

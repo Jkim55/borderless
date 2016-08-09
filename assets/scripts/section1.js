@@ -23,23 +23,32 @@ function extractName(){
 
 function extractCapital(){
   let iso2 = parsedData.names.iso2
-  let capital
-  $.get("https://galvanize-cors-proxy.herokuapp.com/http://country.io/capital.json")
-  .then((capitalISOPairs)=>{
-    if (capitalISOPairs.hasOwnProperty(iso2)){
-      capital = capitalISOPairs[iso2]
-    }
-    $("#capital").append(capital.toUpperCase());
-  })
-  .catch((error)=> {
-    console.error(error)
-  })
+  if (iso2 !== null){
+    let capital
+    $.get("https://galvanize-cors-proxy.herokuapp.com/http://country.io/capital.json")
+    .then((capitalISOPairs)=>{
+      if (capitalISOPairs.hasOwnProperty(iso2)){
+        capital = capitalISOPairs[iso2]
+      }
+      $("#capital").append(capital.toUpperCase());
+    })
+    .catch((error)=> {
+      console.error(error)
+    })
+  } else {
+    $("#capital").append("No data was found for this endpoint")
+  }
+
 }
 
 function appendFlag(){
-  let iso2Flag = parsedData.names.iso2.toLowerCase()
-  let flagURL = "http://www.geonames.org/flags/x/" + iso2Flag  + ".gif"
-  $("#flag").attr("src", flagURL)
+  let iso2Flag = parsedData.names.iso2
+  let flagURL
+  if (iso2Flag !== null){
+    flagURL = "http://www.geonames.org/flags/x/" + iso2Flag.toLowerCase()  + ".gif"
+  } else {
+    $("#flag").attr("src", "../images/noFlag.jpeg")
+  }
 }
 
 // HELPER FUNCTION to initMap()
@@ -103,17 +112,21 @@ function calcTime(offset) {
 
 function extractLanguage(){
   languageArr = parsedData.language
-  $("#langCountry").append(countryName, ": ")
-  for(let language in languageArr){
-    let $lang = $("<li>");
-    if(languageArr[language].official === 'Yes'){
-      $lang.append(languageArr[language].language)
-      $("#langList").append($lang)
-    } else {
-      $lang.append(languageArr[language].language + '*')
-      $("#langList").append($lang)
+  if (languageArr.length !== 0){
+    for(let language in languageArr){
+      let $lang = $("<li>");
+      if(languageArr[language].official === 'Yes'){
+        $lang.append(languageArr[language].language)
+        $("#langList").append($lang)
+      } else {
+        $lang.append(languageArr[language].language + '*')
+        $("#langList").append($lang)
+      }
     }
+  } else{
+    $("#langList").append("No data was found for this endpoint")
   }
+  $("#langCountry").append(countryName, ": ")
 }
 
 

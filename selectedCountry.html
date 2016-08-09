@@ -40,8 +40,6 @@
                   <img id = "flag" src="" height=100px>
                 </div>
               </div>
-
-              <br>
               <div class="currentTimeDate">
                 <span> Current Local Time &#38; Date: </span>
                 <span id="localTD"></span>
@@ -51,11 +49,10 @@
                 <span>Timezone: </span>
                 <span id="timeZone"></span>
               </div>
-              <br>
               <div class="langs">
                 <span id="langCountry">Language(s) spoken in </span>
-                <ul id="langList"></ul>
                 <div id=langFootnote>* denotes an unofficial language of certain regions of the country</div>
+                <ul id="langList"></ul>
               </div>
             </div>
             <div id="map"></div>
@@ -110,6 +107,9 @@
                   <div class="row">
                     <div class="input-field col s12">
                       <textarea id="fxInput" class="materialize-textarea"></textarea>
+                      <div id="fxRateFootnote">
+
+                      </div>
                       <label id="fxLabel" for="fxInput">Convert to USD</label>
                     </div>
                     <a class="waves-effect waves-light btn" id="fxBtn">Calculate Conversion</a>
@@ -125,7 +125,14 @@
       <div id="news" class="col s12">
         <div class="col s12" id="sec3">
           <div class="sContainer">
-
+            <div>
+              <h5>The New York Times </h5>
+              <div id="nyt"></div>
+            </div>
+            <div>
+              <h5>The Guardian </h5>
+              <div id="guardian"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -134,6 +141,7 @@
         <div class="col s12" id="sec4">
           <div class="sContainer">
             <div id="transWidget">
+              <h5>Translation Widget</h5>
               <form id="transForm" class="col s12">
                 <div class="row">
                   <div class="input-field col s12">

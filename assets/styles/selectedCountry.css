@@ -39,7 +39,8 @@ h4 {
 #map {
   width: 600px;
   height: 400px;
-  margin: 45px 25px 0 25px;
+  margin: 40px 30px 0 25px;
+  padding: 0 0 0 0;
 }
 
 a {
@@ -53,11 +54,13 @@ a {
 
 #shortName {
   margin: 15px 0 10px 0;
+  color: rgb(183, 40, 40);
 }
 
-h6, #localTD{
+h6 {
   font-size: 16px;
   font-weight: bolder;
+  color: rgb(183, 40, 40);
 }
 
 .sContainer {
@@ -72,15 +75,26 @@ h6, #localTD{
 
 .sContainer > div {
   flex-direction: row;
+  margin: 15px 25px 15px 25px;
   padding: 15px 25px 15px 25px;
 }
 
+div.s1info{
+  padding-right: 0;
+  /*background-color:rgba(225, 225, 225, 0.6);*/
+}
+
+.s1info > * {
+  margin: 10px 0 5px 0;
+}
+
 .s1flag {
-  margin: 35px 0 0 80px;
+  margin: 0 0 0 0;
+  max-height: 100px;
 }
 
 #shortName {
-  margin: 20px 0 5px 0
+  margin: 0 0 5px 0
 }
 
 #fullName {
@@ -88,7 +102,7 @@ h6, #localTD{
 }
 
 #capital{
-  margin: 5px 0 40px 0px;
+  margin: 5px 0 20px 0px;
 }
 
 .s1header {
@@ -98,6 +112,11 @@ h6, #localTD{
 .s1header > div {
   flex-direction: row;
   align-content: space-between;
+}
+
+#localTD, #timeZone {
+  font-weight: bold;
+  color: rgb(183, 40, 40);
 }
 
 #langList {
@@ -119,7 +138,7 @@ h6, #localTD{
   max-width: 400px
 }
 
-#tLink {
+#tLink, #fxRateFootnote{
   color: rgb(183, 40, 40);
   font-size: 12px;
 }
@@ -133,11 +152,54 @@ h6, #localTD{
   font-weight: bolder;
 }
 
+#aCard {
+  display: flex;
+  flex-direction: row;
+  align-items:stretch;
+  margin: 20px 0 20px 0;
+  border: .5px solid black;
+  padding: 5px 0 5px 10px;
+  background-color: rgba(225, 225, 225, 0.6);
+}
+
+#aImg, #aText {
+  align-content: space-between;
+  margin: 0px 10px 0 0;
+}
+#aImg > img {
+  margin: 5px 0 0 0;
+}
+
+#aText > span > h6{
+  margin: 5px 0 0 0;
+  font-size: 16px;
+}
+
+#aText > div{
+  font-size: 13px;
+  margin-top: 5px;
+}
+#aHdLn {
+  font-size: 11px;
+  font-weight: lighter;
+  margin: 0 0 30px 0;
+}
 .input-field.col.s12{
   padding: 0 20px 0 0;
 }
 
+#sec3 > .sContainer > div{
+  max-width: 50%;
+}
+
 #sec4 > .sContainer{
   display: block;
-  /*overflow-y: scroll;*/
+}
+
+#translator {
+  padding: 0 0 0 0;
+}
+
+#transLabel:active {
+  margin-bottom: 50px
 }

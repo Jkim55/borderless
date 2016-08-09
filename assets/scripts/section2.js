@@ -18,22 +18,26 @@ function extractTravelAdvisories() {
   let travelAdviceObj = parsedData.advise
   for(let travelAdvice in travelAdviceObj){
     let $tAdvice = $("<div>");
-    let tAMessage = travelAdviceObj[travelAdvice].advise // LATER: remove <!-- --> if it exists
+    let tAMessage = travelAdviceObj[travelAdvice].advise
     $tAdvice.append(tAMessage)
-    console.log(tAMessage);
 
     let $tCountry = $("<div>");
     $tCountry.attr("class", "tCountry")
     let tCMessage = "Issued by " + travelAdvice + " "
     $tCountry.append(tCMessage)
-    console.log(tCMessage);
 
-    let $tDocs = $("<a>")
-    $tDocs.text("Full Report")
+    // let $tDocs = $("<a>", {"text", "Full Report"})
+    // $tDocs.text("Full Report")
+    // let fullDoc = travelAdviceObj[travelAdvice].url
+    // $tDocs.attr("href", fullDoc)
+    // $tDocs.attr("id", "tLink")
+
     let fullDoc = travelAdviceObj[travelAdvice].url
-    $tDocs.attr("href", fullDoc)
-    $tDocs.attr("id", "tLink")
-    console.log($($tDocs));
+    let $tDocs = $("<a>", {
+      "id": "tLink",
+      "href": fullDoc
+    })
+    $tDocs.text("Full Report")
 
     $("#travelAdvisories").append($tAdvice);
     $("#travelAdvisories").append($tCountry);
@@ -44,10 +48,14 @@ function extractTravelAdvisories() {
 
 function extractVaccinations() {
   let vaccinationArr = parsedData.vaccinations
-  for(let vaccination in vaccinationArr){
-    let $vaccine = $("<div>");
-    $vaccine.append(vaccinationArr[vaccination].name, ": ", vaccinationArr[vaccination].message)
-    $("#vaccinationRecs").append($vaccine);
+  if (vaccinationArr.length !== 0){
+    for(let vaccination in vaccinationArr){
+      let $vaccine = $("<div>");
+      $vaccine.append(vaccinationArr[vaccination].name, ": ", vaccinationArr[vaccination].message)
+      $("#vaccinationRecs").append($vaccine);
+    }
+  } else {
+    $("#vaccinationRecs").append("No vaccination recommendations exist for travel to ", countryName)
   }
 }
 
@@ -100,14 +108,17 @@ function extractCurrencySummary() {
 
 function extractFXWidget() {
   let currencyRate = parseFloat(parsedData.currency.rate)
-  fxRate = 1/currencyRate            // fx for 1 USD
+  fxRate = 1/currencyRate
+  let $fxRate = $("<div>")
+  $fxRate.append("FX rate to 1 USD($) is ", + fxRate)          // fx for 1 USD
+  $("fxRateFootnote").append($fxRate);
 }
 
 $("#fxBtn").click((event)=>{
   let $fxInput = $("#fxInput").val()
   let $fxCalc = parseFloat($fxInput)   // (1) Capture user input
   $fxCalc = ($fxCalc * fxRate).toFixed(2)
-  let $fxResults = $("<div>");
+  let $fxResults = $("<div>")
   let snippet = $fxInput + " " + currencyName + " (" + currencySymbol + ") is equivalant to $" + $fxCalc + " USD"
   $fxResults.append(snippet)
   $("#fxList").append($fxResults)
