@@ -46,6 +46,7 @@ function appendFlag(){
   let flagURL
   if (iso2Flag !== null){
     flagURL = "http://www.geonames.org/flags/x/" + iso2Flag.toLowerCase()  + ".gif"
+    $("#flag").attr("src", flagURL)
   } else {
     $("#flag").attr("src", "../images/noFlag.jpeg")
   }
