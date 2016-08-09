@@ -1,4 +1,5 @@
 // GLOBAL VARIABLES
+let langsToTrans = []
 let textToTrans
 let yandexURLArr = []
 
@@ -11,7 +12,6 @@ function buildSection4() {
 }
 
 function identifyOfficialLang() {
-  let langsToTrans = []
   for(let index in languageArr){
     if (languageArr[index].official === "Yes"){
       langsToTrans.push(languageArr[index].language)
@@ -20,8 +20,8 @@ function identifyOfficialLang() {
   return langsToTrans
 }
 
-function createLabels() {
-  
+function createLabels() { //label for language name
+
 }
 
 function findLangKey(langsToTransArr) {
@@ -66,9 +66,15 @@ $("#transBtn").click((event)=>{
       return data["text"][0]
     })
     .then((phrase) => {                                  // (2.3) Append to dom
-    let $div = $("<div>");
-    $div.append("translated to: ", phrase)
-    $("#results").append($div);
+      let $originalText = $("<h5>");
+      $originalText.append(textToTrans.toUpperCase())
+      let $translated = $("<div>")
+      $translated.append(langsToTrans[index],": ", phrase)
+      $("#transResults").append($originalText);
+      $("#transResults").append($translated);
+    })
+    .catch((error)=> {
+      console.error(error)
     })
   }
 })

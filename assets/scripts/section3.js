@@ -10,7 +10,7 @@ function nytData(){
   parseNYTData(url)
 }
 
-function nytURL() {  // topics to cover (1) economy & politics (2) travel, arts & culture
+function nytURL() {
   let requestedBegDate = setBegDate().replace(/-/g, "")  // YYYYMMDD
   let requestedEndDate = setEndDate().replace(/-/g, "")  // YYYYMMDD
   let nytAPIURL= "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key="+ nyTimesKey + "&fq=section_name\:(\"world\") AND headline.search:(\"" + countryName + "\")&facet_field=section_name&facet_filter=true&begin_date=" + requestedBegDate + "&end_date=" + requestedEndDate + "&sort=newest"
@@ -39,9 +39,12 @@ function parseNYTData(newsURL){
       console.log("this is the pubdate: ", pubDate);  // this needs to run thru formatPubDate()
     }
   })
+  .catch((error)=> {
+    console.error(error)
+  })
 }
 
-// HELPER FUNCTION: takes in guardianURL() and parseGuardianData() to output results from NYT
+// HELPER FUNCTION: runs guardianURL() & parseGuardianData() to output results
 function guardianData(){
   let url = guardianURL()
   parseGuardianData(url)
@@ -73,12 +76,15 @@ function parseGuardianData(newsURL){
       console.log("this is the articleURL: ", articleURL);
       console.log("this is the thumbnailURL: ", thumbnailURL);
       console.log("this is the snippet: ", snippet);
-      console.log("this is the pubdate: ", pubDate);  // this needs to run thru formatPubDate()
+      console.log("this is the pubdate: ", pubDate);
     }
+  })
+  .catch((error)=> {
+    console.error(error)
   })
 }
 
-// HELPER FUNCTIONs to nytURL() & guardianURL(): set begDate (start of date range) in functions
+// HELPER FUNCTIONs to nytURL() & guardianURL(): set begDate (start of date range)
 function setBegDate() {
   let begDate = new Date()
   begDate.setDate(begDate.getDate() - 90)

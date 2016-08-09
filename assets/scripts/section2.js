@@ -1,40 +1,53 @@
+// GLOBAL VARIABLES
+let fxRate
+let currencyName
+let currencySymbol
+
 // CONTROLLER FUNCTION: triggers helper functions that parses single country's JSON
 function buildSection2() {
   extractTravelAdvisories()
   extractVaccinations()
   extractWaterDrinkability()
   extractPhone()
-  extractCurrency()
   extractElectricity()
+  extractCurrencySummary()
+  extractFXWidget()
 }
 
 function extractTravelAdvisories() {
   let travelAdviceObj = parsedData.advise
   for(let travelAdvice in travelAdviceObj){
-    let div = $("<div>");
-    div.append(travelAdviceObj[travelAdvice].advise, travelAdviceObj[travelAdvice].url)
-    $("#sec2").append(div);
+    let $tAdvice = $("<div>");
+    let tAMessage = travelAdviceObj[travelAdvice].advise // LATER: remove <!-- --> if it exists
+    $tAdvice.append(tAMessage)
+    console.log(tAMessage);
+
+    let $tCountry = $("<div>");
+    $tCountry.attr("class", "tCountry")
+    let tCMessage = "Issued by " + travelAdvice + " "
+    $tCountry.append(tCMessage)
+    console.log(tCMessage);
+
+    let $tDocs = $("<a>")
+    $tDocs.text("Full Report")
+    let fullDoc = travelAdviceObj[travelAdvice].url
+    $tDocs.attr("href", fullDoc)
+    $tDocs.attr("id", "tLink")
+    console.log($($tDocs));
+
+    $("#travelAdvisories").append($tAdvice);
+    $("#travelAdvisories").append($tCountry);
+    $(".tCountry").append($tDocs)
   }
-  // Will want to correlate with ISO- http://country.io/names.json)
-  // OBJ looks like this... must iterate thru the OBJ to pull data value, which is a nested obj
-  //     {ISO2: {
-  //       advise: "<!-- START adv-taiwan -->Exercise normal security precautions<!-- END adv-taiwan -->"
-  //       url: "http://travel.gc.ca/destinations/taiwan"
-  //       }
-  //     }
-
-  // Message to look like:
-  //     <message from ISO2.advice> issued by <iso2 countryname>
-  //     Full report <href to url>
-
 }
+
 
 function extractVaccinations() {
   let vaccinationArr = parsedData.vaccinations
   for(let vaccination in vaccinationArr){
-    let div = $("<div>");
-    div.append(vaccinationArr[vaccination].name, vaccinationArr[vaccination].message)
-    $("#sec2").append(div);
+    let $vaccine = $("<div>");
+    $vaccine.append(vaccinationArr[vaccination].name, ": ", vaccinationArr[vaccination].message)
+    $("#vaccinationRecs").append($vaccine);
   }
 }
 
@@ -42,76 +55,62 @@ function extractWaterDrinkability() {
   let waterDrinkability = parsedData.water.short
   let waterOutput
   if (waterDrinkability === null){
-    waterOutput = "No advisements exists regarding tap water in " + countryName
+    waterOutput = "No advice exists regarding tap water in " + countryName
   } else {
     waterOutput = "Drinking tap water in " + countryName + " is " + waterDrinkability
   }
-  let div = $("<div>");
-  div.append(waterOutput)
-  $("#sec2").append(div);
+  $("#wAdvice").append(waterOutput);
 }
 
 function extractPhone() {
   let countryCode = parsedData.telephone.calling_code
   let police = parsedData.telephone.police
-
-  let div1 = $("<div>");
-  div1.append(countryCode)
-  $("#sec2").append(div1);
-
-  let div = $("<div>");
-  div.append(police)
-  $("#sec2").append(div);
-}
-
-function extractCurrency(){
-  let currencyName =  parsedData.currency.name
-  let currencySymbol = parsedData.currency.symbol
-  let currencyRate = parsedData.currency.rate
-  let usDollarRate = 1
-  let exchangeRate = usDollarRate/currencyRate
-
-  let div = $("<div>");
-  div.append(currencyName, currencySymbol, currencyRate)
-  $("#sec2").append(div);
-
-  // Format string to read:
-  //     The currency in <country name> is <currency name> (<currency symbol>)
-  //     Rate of exchange for <input field> <currency name> is <automatically calculated> in US Dollars
+  if (police === ""){
+    police = "No contact information is provided for the police in " + countryName
+  }
+  $("#cCode").append(countryCode)
+  $("#poPo").append(police);
 }
 
 function extractElectricity() {
-  let electricalInfo = parsedData.electricity //iterate thru parsedData; keys: voltage, frequency, plugs
-  let voltage = electricalInfo.voltage
-  let frequency = electricalInfo.frequency
-  let plugsArr = []
-  for(let plug in electricalInfo.plugs){
-    plugsArr.push(electricalInfo.plugs[plug])
-  }
-
-  plugsArr = plugsArr.join(" / ")
-
-  let div = $("<div>");
-  div.append(electricalInfo)
-  $("#sec2").append(div);
-
-  let div1 = $("<div>");
-  div1.append(voltage)
-  $("#sec2").append(div1);
-
-  let div2 = $("<div>");
-  div2.append(frequency)
-  $("#sec2").append(div2);
-
-  let div3 = $("<div>");
-  div3.append(plugsArr)
-  $("#sec2").append(div3);
+  let voltage = parsedData.electricity.voltage
+  let frequency = parsedData.electricity.frequency
+  let sockets = displaySocketInfo()
+  $("#voltage").append(voltage);
+  $("#frequency").append(frequency);
+  $("#socket").append(sockets);
 }
 
-// Display info in the following way:
-// Electrical Standards
-//     Voltage: <voltage> V
-//     Frequency: <frequency> Hz
-//     Power sockets: type <>
+// HELPER FUNCTION to extractElectricity()
+function displaySocketInfo() {
+  let plugsArr = []
+  for(let plug in parsedData.electricity.plugs){
+    plugsArr.push(parsedData.electricity.plugs[plug])
+  }
+  plugsArr = plugsArr.join(" / ")
+  return plugsArr
+}
+
+function extractCurrencySummary() {
+  currencyName =  parsedData.currency.name
+  currencySymbol = parsedData.currency.symbol
+  $("#fxInfo").prepend(countryName);
+  $("#fxInfo").append(currencyName, " (", currencySymbol, ")");
+}
+
+function extractFXWidget() {
+  let currencyRate = parseFloat(parsedData.currency.rate)
+  fxRate = 1/currencyRate            // fx for 1 USD
+}
+
+$("#fxBtn").click((event)=>{
+  let $fxInput = $("#fxInput").val()
+  let $fxCalc = parseFloat($fxInput)   // (1) Capture user input
+  $fxCalc = ($fxCalc * fxRate).toFixed(2)
+  let $fxResults = $("<div>");
+  let snippet = $fxInput + " " + currencyName + " (" + currencySymbol + ") is equivalant to $" + $fxCalc + " USD"
+  $fxResults.append(snippet)
+  $("#fxList").append($fxResults)
+})
 
 // travelbriefing.org Branding

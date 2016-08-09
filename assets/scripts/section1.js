@@ -4,27 +4,21 @@ let countryLong
 let countryZoom
 let languageArr
 
-// CONTROLLER FUNCTION: triggers helper(?) functions that parses single country's JSON
+// CONTROLLER FUNCTION: handles building general info on country
 function buildSection1() {
   extractName()
   extractCapital()
   appendFlag()
   extractMapCoordinates()
-  extractLanguage()
   extractTime()
+  extractLanguage()
 }
 
 function extractName(){
   let shortName = parsedData.names.name
   let fullName = parsedData.names.full
-
-  let div = $("<div>");
-  div.append(shortName)
-  $("#sec1").append(div);
-
-  let div2 = $("<div>");
-  div2.append(fullName)
-  $("#sec1").append(div2);
+  $("#shortName").append(shortName);
+  $("#fullName").append(fullName);
 }
 
 function extractCapital(){
@@ -35,28 +29,25 @@ function extractCapital(){
     if (capitalISOPairs.hasOwnProperty(iso2)){
       capital = capitalISOPairs[iso2]
     }
-    let div = $("<div>");
-    div.append(capital)
-    $("#sec1").append(div);
+    $("#capital").append(capital.toUpperCase());
+  })
+  .catch((error)=> {
+    console.error(error)
   })
 }
 
 function appendFlag(){
   let iso2Flag = parsedData.names.iso2.toLowerCase()
   let flagURL = "http://www.geonames.org/flags/x/" + iso2Flag  + ".gif"
-  let flag = $("<img>")
-  flag.attr("src", flagURL)
-  flag.attr("height","125px")
-  $("#sec1").append(flag)
-  // append src to flag img
+  $("#flag").attr("src", flagURL)
 }
 
-
+// HELPER FUNCTION to initMap()
 function extractMapCoordinates(){
   countryLat = parseFloat(parsedData.maps.lat)
   countryLong = parseFloat(parsedData.maps.long)
   countryZoom = parseFloat(parsedData.maps.zoom-1)
-  // addGoogMapsSRC()
+  // addGoogMapsSRC()  // attempt to hide key
 }
 
 // function addGoogMapsSRC (){
@@ -64,56 +55,34 @@ function extractMapCoordinates(){
 //   $("#key").attr('src', mapsKey)
 // }
 
+// FUNCTION: generates GOOGmaps
 function initMap() {
-  var mapDiv = document.getElementById('map');
-  var map = new google.maps.Map(mapDiv, {
+  let mapDiv = document.getElementById("map");
+  let map = new google.maps.Map(mapDiv, {
       center: {lat: countryLat, lng: countryLong},
       zoom: countryZoom
   });
 }
 
-$('#generalInfo').click(()=>{
-  setTimeout(initMap, 0)
-})
-
-function extractLanguage(){
-  languageArr = parsedData.language
-  let languageOutput = []  // might change to array
-  for(let language in languageArr){
-    if(languageArr[language].official === 'Yes'){
-        languageOutput.push(languageArr[language].language)
-    } else {
-      languageOutput.push(languageArr[language].language + '*')
-    }
-  }
-  languageOutput.splice(languageOutput.length-1,0,'and')
-  languageOutput = languageOutput.join(', ')
-
-  let div = $("<div>");
-  div.append(languageOutput)
-  $("#sec1").append(div);
-  // format message to read as below.
-  //    The languages spoken in <country name> are:
-  //    append ul list
-  //    * Not an official language
-}
+// $('#generalInfo').click(()=>{
+//   setTimeout(initMap, 0)
+// })
 
 function extractTime(){
   getTZData()
   .then((data)=>{
     let localOffset = data.dstOffset + data.rawOffset
     let localTZName = data.timeZoneName
-    let localTime = calcTime(localOffset)  // need to return localTime to do the below .then
+    let localTime = calcTime(localOffset)  // Return localTime to do the below .then
     if (localTime === "Invalid Date"){
       localTime = "Sorry, the current time and date is not available"
     }
-    // if data from .then === {status: "ZERO_RESULTS"} display error message
-    let div = $("<div>");      // can pull this out as a .then(append(id, item){})
-    div.append(localTime)
-    $("#sec1").append(div);
+    $("#timeZone").append(localTZName)
+    $("#localTD").append(localTime);
   })
-  //    <coutry name> is in the <timezone> timezone.
-  //    The local time is <timeOutput>
+  .catch((error)=> {
+    console.error(error)
+  })
 }
 
 // HELPER FUNCTION to extractTime()
@@ -122,6 +91,7 @@ function getTZData(){
   let googTZapiURL = "https://maps.googleapis.com/maps/api/timezone/json?location=" + countryLat + "," + countryLong + "&timestamp=" + timeStampUTC + "&key=" + googKey
   return $.get(googTZapiURL)
 }
+
 // HELPER FUNCTION to extractTime()
 function calcTime(offset) {
   let d = new Date();
@@ -130,6 +100,22 @@ function calcTime(offset) {
   let timeOutput = nd.toLocaleString();
   return timeOutput
 }
+
+function extractLanguage(){
+  languageArr = parsedData.language
+  $("#langCountry").append(countryName, ": ")
+  for(let language in languageArr){
+    let $lang = $("<li>");
+    if(languageArr[language].official === 'Yes'){
+      $lang.append(languageArr[language].language)
+      $("#langList").append($lang)
+    } else {
+      $lang.append(languageArr[language].language + '*')
+      $("#langList").append($lang)
+    }
+  }
+}
+
 
 // travelbriefing.org Branding
 // Google Maps Branding

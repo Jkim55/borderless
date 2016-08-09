@@ -12,72 +12,155 @@
     <link rel="stylesheet" type="text/css" href="assets/styles/selectedCountry.css">
   </head>
   <body class="container">
+    <div class="col s12 right-align" id="logo">
+      <h4>BORDERLESS</h4>
+      <p>Get lost. Stay informed. </p>
+    </div>
     <div class="row">
-      <div class="col s12 right-align" id="header">
-        <h4>BORDERLESS</h4>
-        <p>Get lost. Stay informed. </p>
-      </div>
       <div class="col s12">
         <ul class="tabs" id="tabnav">
-          <li class="tab col s3"><a href="#landing">Landing</a></li>
           <li class="tab col s3" id="generalInfo"><a href="#general">General Info</a></li>
-          <li class="tab col s3"><a href="#visitor">Good to Knows</a></li>
+          <li class="tab col s3"><a href="#visiting">Good to Knows</a></li>
           <li class="tab col s3"><a href="#news">Current Events</a></li>
           <li class="tab col s3"><a href="#translate">Translation</a></li>
         </ul>
       </div>
 
-      <div id="landing" class="col s12">
-        <div class="col s12" id="sec1.1">
-        </div>
-      </div>
-
       <div id="general" class="col s12">
         <div class="col s12" id="sec1">
-          <h5>Map</h5>
-          <div id="map"></div>
-        </div>
-      </div>
-
-      <div id="visitor" class="col s12">
-        <div class="col s12" id="sec2">
-        </div>
-      </div>
-
-      <div id="news" class="col s12">
-        <div class="col s12" id="sec3">
-        </div>
-      </div>
-
-      <div id="translate" class="col s12">
-        <div class="col s12" id="sec4">
-          <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <textarea id="translator" class="materialize-textarea"></textarea>
-                  <label for="translator">Input Text for Translation</label>
+          <div class="sContainer">
+            <div class="s1info">
+              <div class="s1header">
+                <div>
+                  <h1 id="shortName"></h1>
+                  <h5 id="fullName"></h5>
+                  <p id="capital">CAPITAL: </p>
                 </div>
-                <a class="waves-effect waves-light btn" id="transBtn">button</a>
+                <div class="s1flag">
+                  <img id = "flag" src="" height=100px>
+                </div>
               </div>
-            </form>
-            <div id="results">
+
+              <br>
+              <div class="currentTimeDate">
+                <span> Current Local Time &#38; Date: </span>
+                <span id="localTD"></span>
+              </div>
+
+              <div class="timezone">
+                <span>Timezone: </span>
+                <span id="timeZone"></span>
+              </div>
+              <br>
+              <div class="langs">
+                <span id="langCountry">Language(s) spoken in </span>
+                <ul id="langList"></ul>
+                <div id=langFootnote>* denotes an unofficial language of certain regions of the country</div>
+              </div>
+            </div>
+            <div id="map"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="visiting" class="col s12">
+        <div class="col s12" id="sec2">
+          <div class="sContainer">
+            <!-- <div id="s2info"> -->
+            <div class="preTravel">
+              <h5>Travel Advisories</h5>
+              <div id="travelAdvisories">
+                <!-- location for dynamically created TravelAdvisories -->
+              </div>
+
+              <div id="vaccinationRecs">
+                <h5>Vaccination Recommendations</h5>
+                <!-- location for dynamically created vaccinationRecs -->
+              </div>
+
+              <div class=waterAdvice>
+                <h5>Tap Water Safety</h5>
+                <div id=wAdvice></div>
+              </div>
+            </div>
+
+            <div class="onLocation">
+              <h5>Utilities &#38; Services</h5>
+              <div class="phone">
+                <h6>Phone Numbers</h6>
+                <div id="cCode">Country Code: </div>
+                <div id="poPo">Police: </div>
+              </div>
+              <br>
+              <div class="electical">
+                <h6>Electrical Standards</h6>
+                <div id="voltage">Voltage: </div>
+                <div id="frequency">Frequency: </div>
+                <div id="socket">Socket Type(s): </div>
+              </div>
+            </div>
+            <div class="currency">
+              <div class="fxSummary">
+                <h5>Currency Exchange</h5>
+                <span> The currency in </span>
+                <span id=fxInfo> is </span>
+              </div>
+              <div class="fxWidget">
+                <form id="fxForm"class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <textarea id="fxInput" class="materialize-textarea"></textarea>
+                      <label id="fxLabel" for="fxInput">Convert to USD</label>
+                    </div>
+                    <a class="waves-effect waves-light btn" id="fxBtn">Calculate Conversion</a>
+                  </div>
+                </form>
+                <div id="fxList"></div>  <!-- converted fx rates go here -->
+              </div>
             </div>
           </div>
         </div>
       </div>
 
+      <div id="news" class="col s12">
+        <div class="col s12" id="sec3">
+          <div class="sContainer">
+
+          </div>
+        </div>
+      </div>
+
+      <div id="translate" class="col s12">
+        <div class="col s12" id="sec4">
+          <div class="sContainer">
+            <div id="transWidget">
+              <form id="transForm" class="col s12">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea id="translator" class="materialize-textarea"></textarea>
+                    <label for="translator" id="transLabel"> Translate English Phrases</label>
+                  </div>
+                  <a class="waves-effect waves-light btn" id="transBtn">Translate Phrase</a>
+                </div>
+              </form>
+            </div>
+
+            <div id="transResults"></div>
+
+          </div>
+        </div>
+      </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script src="assets/scripts/config.js"></script>
-    <script src="assets/scripts/section1.js"></script>            <!-- For section1 page -->
-    <script src="assets/scripts/section2.js"></script>            <!-- For section2 page -->
-    <script src="assets/scripts/section3.js"></script>            <!-- For section3 page -->
-    <script src="assets/scripts/allLanguagesJSON.js"></script>    <!-- allCountries_JSON -->
-    <script src="assets/scripts/section4.js"></script>            <!-- For section4 page -->
-    <script src="assets/scripts/selectedCountry.js"></script>     <!-- All for single country page -->
+    <script src="assets/scripts/section1.js"></script>
+    <script src="assets/scripts/section2.js"></script>
+    <script src="assets/scripts/section3.js"></script>
+    <script src="assets/scripts/allLanguagesJSON.js"></script>
+    <script src="assets/scripts/section4.js"></script>
+    <script src="assets/scripts/selectedCountry.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6eZpeiZmAvkg_cwPD1AtUMoVb4Itn5n4&callback=initMap">
     </script>
