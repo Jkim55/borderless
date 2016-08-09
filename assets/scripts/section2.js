@@ -1,3 +1,8 @@
+// GLOBAL VARIABLES
+let fxRate
+let currencyName
+let currencySymbol
+
 // CONTROLLER FUNCTION: triggers helper functions that parses single country's JSON
 function buildSection2() {
   extractTravelAdvisories()
@@ -16,6 +21,7 @@ function extractTravelAdvisories() {
     div.append(travelAdviceObj[travelAdvice].advise, travelAdviceObj[travelAdvice].url)
     $("#sec2").append(div);
   }
+
   // Will want to correlate with ISO- http://country.io/names.json)
   // OBJ looks like this... must iterate thru the OBJ to pull data value, which is a nested obj
   //     {ISO2: {
@@ -62,17 +68,8 @@ function extractElectricity() {
   let voltage = parsedData.electricity.voltage
   let frequency = parsedData.electricity.frequency
   let sockets = displaySocketInfo()
-
-  // let div1 = $("<div>");
-  // div1.append(voltage)
   $("#voltage").append(voltage);
-
-  // let div2 = $("<div>");
-  // div2.append(frequency)
   $("#frequency").append(frequency);
-
-  // let div3 = $("<div>");
-  // div3.append(sockets)
   $("#socket").append(sockets);
 }
 
@@ -87,19 +84,23 @@ function displaySocketInfo() {
 }
 
 function extractCurrencySummary() {
-  let currencyName =  parsedData.currency.name
-  let currencySymbol = parsedData.currency.symbol
+  currencyName =  parsedData.currency.name
+  currencySymbol = parsedData.currency.symbol
   $("#fxInfo").prepend(countryName);
-  $("#fxInfo").append(currencyName, "(", currencySymbol, ")");
+  $("#fxInfo").append(currencyName, " (", currencySymbol, ")");
 }
 
 function extractFXWidget() {
   let currencyRate = parseFloat(parsedData.currency.rate)
-  let fxRate = 1/currencyRate            // fx for 1 USD
-  let $fxCalc = parseFloat($("#fxInput").val())   // (1) Capture user input
-  $fxCalc = parseFloat($fxCalc) * fxRate
-  $("#fxCalculated").append($fxCalc)
-  console.log($fxCalc)
+  fxRate = 1/currencyRate            // fx for 1 USD
 }
+
+$("#fxBtn").click((event)=>{
+  let $fxInput = $("#fxInput").val()
+  let $fxCalc = parseFloat($fxInput)   // (1) Capture user input
+  $fxCalc = ($fxCalc * fxRate).toFixed(2)
+  $("#fxCalculated").prepend($fxInput, " ", currencyName, " (", currencySymbol, ")")
+  $("#fxCalculated").append($fxCalc)
+})
 
 // travelbriefing.org Branding

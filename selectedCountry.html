@@ -19,7 +19,6 @@
       </div>
       <div class="col s12">
         <ul class="tabs" id="tabnav">
-          <li class="tab col s3"><a href="#landing">Landing</a></li>
           <li class="tab col s3" id="generalInfo"><a href="#general">General Info</a></li>
           <li class="tab col s3"><a href="#visiting">Good to Knows</a></li>
           <li class="tab col s3"><a href="#news">Current Events</a></li>
@@ -27,24 +26,16 @@
         </ul>
       </div>
 
-      <div id="landing" class="col s12">
-        <div class="col s12" id="sec1.1">
-        </div>
-      </div>
-
       <div id="general" class="col s12">
         <div class="col s12" id="sec1">
           <div class="sContainer">
-            <div id="s1info">
+            <div class="s1info">
               <div class="name">
                 <h1 id="shortName"></h1>
                 <h5 id="fullName"></h5>
                 <p id="capital">Capital: </p>
               </div>
 
-              <div class="flag">
-                <img id = "flag" src="" height=100px>
-              </div>
               <br>
               <div class="currentTimeDate">
                 <span> Local time &#38; date: </span>
@@ -63,6 +54,11 @@
                 <span>(*) not an official language</span>
               </div>
             </div>
+
+            <div class="s1flag">
+              <img id = "flag" src="" height=100px>
+            </div>
+
             <div id="map"></div>
           </div>
         </div>
@@ -121,8 +117,8 @@
                   </div>
                 </form>
                 <div id="coverted">
-                  <span id=fxCalculated> is equivalant to </span>
-                  <span> US Dollars.</span>
+                  <span id=fxCalculated> is equivalant to $</span>
+                  <span> USD.</span>
                 </div>
               </div>
             </div>
@@ -157,12 +153,12 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script src="assets/scripts/config.js"></script>
-    <script src="assets/scripts/section1.js"></script>            <!-- For section1 page -->
-    <script src="assets/scripts/section2.js"></script>            <!-- For section2 page -->
-    <script src="assets/scripts/section3.js"></script>            <!-- For section3 page -->
-    <script src="assets/scripts/allLanguagesJSON.js"></script>    <!-- allCountries_JSON -->
-    <script src="assets/scripts/section4.js"></script>            <!-- For section4 page -->
-    <script src="assets/scripts/selectedCountry.js"></script>     <!-- All for single country page -->
+    <script src="assets/scripts/section1.js"></script>
+    <script src="assets/scripts/section2.js"></script>
+    <script src="assets/scripts/section3.js"></script>
+    <script src="assets/scripts/allLanguagesJSON.js"></script>
+    <script src="assets/scripts/section4.js"></script>
+    <script src="assets/scripts/selectedCountry.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6eZpeiZmAvkg_cwPD1AtUMoVb4Itn5n4&callback=initMap">
     </script>

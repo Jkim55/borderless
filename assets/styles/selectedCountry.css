@@ -52,6 +52,14 @@ a {
   margin: 15px 15px 45px 0;
 }
 
+#shortName {
+  margin: 15px 0 10px 0;
+}
+
+h6 {
+  font-size: 16px;
+  font-weight: bolder;
+}
 
 .sContainer {
   display: flex;
@@ -64,13 +72,22 @@ a {
 .sContainer > div {
   flex-direction: row;
   align-content: space-between;;
-  padding: 15px 15px 15px 15px;
+  padding: 15px 15px 15px 25px;
+
 }
 
-.s1info {
-  background-color:rgba(224, 222, 222, 0.6);
+.s1flag {
+  margin-top: 35px;
 }
 
 #shortName {
-  margin-top: 20px;
+  margin: 20px 0 5px 0
+}
+
+#fullName {
+  margin: 0 0 0 0
+}
+
+#capital{
+  margin-top: 5px;
 }

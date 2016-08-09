@@ -44,7 +44,7 @@ function parseNYTData(newsURL){
   })
 }
 
-// HELPER FUNCTION: takes in guardianURL() and parseGuardianData() to output results from NYT
+// HELPER FUNCTION: runs guardianURL() & parseGuardianData() to output results
 function guardianData(){
   let url = guardianURL()
   parseGuardianData(url)
@@ -76,7 +76,7 @@ function parseGuardianData(newsURL){
       console.log("this is the articleURL: ", articleURL);
       console.log("this is the thumbnailURL: ", thumbnailURL);
       console.log("this is the snippet: ", snippet);
-      console.log("this is the pubdate: ", pubDate);  // this needs to run thru formatPubDate()
+      console.log("this is the pubdate: ", pubDate);
     }
   })
   .catch((error)=> {
@@ -84,7 +84,7 @@ function parseGuardianData(newsURL){
   })
 }
 
-// HELPER FUNCTIONs to nytURL() & guardianURL(): set begDate (start of date range) in functions
+// HELPER FUNCTIONs to nytURL() & guardianURL(): set begDate (start of date range)
 function setBegDate() {
   let begDate = new Date()
   begDate.setDate(begDate.getDate() - 90)

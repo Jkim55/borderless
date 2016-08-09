@@ -64,9 +64,9 @@ function initMap() {
   });
 }
 
-$('#generalInfo').click(()=>{
-  setTimeout(initMap, 0)
-})
+// $('#generalInfo').click(()=>{
+//   setTimeout(initMap, 0)
+// })
 
 function extractTime(){
   getTZData()
@@ -77,7 +77,6 @@ function extractTime(){
     if (localTime === "Invalid Date"){
       localTime = "Sorry, the current time and date is not available"
     }
-    // if data === {status: "ZERO_RESULTS"}: display error message
     $("#timeZone").append(localTZName)
     $("#localTD").append(localTime);
   })
