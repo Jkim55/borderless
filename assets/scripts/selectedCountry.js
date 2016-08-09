@@ -15,7 +15,7 @@ $(function loadPage() {
       setTimeout(initMap, 0)
       buildSection1()
       buildSection2()
-      // buildSection3()
+      buildSection3()
       buildSection4()
     })
     .catch((error)=> {
@@ -28,7 +28,7 @@ $(function loadPage() {
     setTimeout(initMap, 0)
     buildSection1()         // how to fadein? .delay(2000).fadeIn(1000)
     buildSection2()
-    // buildSection3()
+    buildSection3()
     buildSection4()
   }
 })

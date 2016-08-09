@@ -42,10 +42,10 @@ function extractCapital(){
 }
 
 function appendFlag(){
-  let iso2Flag = parsedData.names.iso2.toLowerCase()
+  let iso2Flag = parsedData.names.iso2
   let flagURL
   if (iso2Flag !== null){
-    flagURL = "http://www.geonames.org/flags/x/" + iso2Flag  + ".gif"
+    flagURL = "http://www.geonames.org/flags/x/" + iso2Flag.toLowerCase()  + ".gif"
   } else {
     $("#flag").attr("src", "../images/noFlag.jpeg")
   }

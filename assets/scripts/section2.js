@@ -18,22 +18,19 @@ function extractTravelAdvisories() {
   let travelAdviceObj = parsedData.advise
   for(let travelAdvice in travelAdviceObj){
     let $tAdvice = $("<div>");
-    let tAMessage = travelAdviceObj[travelAdvice].advise // LATER: remove <!-- --> if it exists
+    let tAMessage = travelAdviceObj[travelAdvice].advise
     $tAdvice.append(tAMessage)
-    console.log(tAMessage);
 
     let $tCountry = $("<div>");
     $tCountry.attr("class", "tCountry")
     let tCMessage = "Issued by " + travelAdvice + " "
     $tCountry.append(tCMessage)
-    console.log(tCMessage);
 
     let $tDocs = $("<a>")
     $tDocs.text("Full Report")
     let fullDoc = travelAdviceObj[travelAdvice].url
     $tDocs.attr("href", fullDoc)
     $tDocs.attr("id", "tLink")
-    console.log($($tDocs));
 
     $("#travelAdvisories").append($tAdvice);
     $("#travelAdvisories").append($tCountry);

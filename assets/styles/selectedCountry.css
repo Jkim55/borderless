@@ -39,7 +39,8 @@ h4 {
 #map {
   width: 600px;
   height: 400px;
-  margin: 40px 25px 0 25px;
+  margin: 40px 30px 0 25px;
+  padding: 0 0 0 0;
 }
 
 a {
@@ -62,10 +63,6 @@ h6 {
   color: rgb(183, 40, 40);
 }
 
-#localTD, #timeZone {
-  font-weight: bold;
-  color: rgb(183, 40, 40);
-}
 .sContainer {
   display: flex;
   justify-content: space-between;
@@ -78,6 +75,7 @@ h6 {
 
 .sContainer > div {
   flex-direction: row;
+  margin: 15px 25px 15px 25px;
   padding: 15px 25px 15px 25px;
 }
 
@@ -86,12 +84,12 @@ div.s1info{
 }
 
 .s1flag {
-  margin: 25px 0 0 80px;
+  margin: 0 0 0 0;
   max-height: 100px;
 }
 
 #shortName {
-  margin: 10px 0 5px 0
+  margin: 0 0 5px 0
 }
 
 #fullName {
@@ -99,7 +97,7 @@ div.s1info{
 }
 
 #capital{
-  margin: 5px 0 35px 0px;
+  margin: 5px 0 20px 0px;
 }
 
 .s1header {
@@ -109,6 +107,15 @@ div.s1info{
 .s1header > div {
   flex-direction: row;
   align-content: space-between;
+}
+
+.s1info > * {
+  margin: 10px 0 5px 0;
+}
+
+#localTD, #timeZone {
+  font-weight: bold;
+  color: rgb(183, 40, 40);
 }
 
 #langList {
@@ -130,7 +137,7 @@ div.s1info{
   max-width: 400px
 }
 
-#tLink, #fxRateFootnote  {
+#tLink, #fxRateFootnote{
   color: rgb(183, 40, 40);
   font-size: 12px;
 }
@@ -144,11 +151,46 @@ div.s1info{
   font-weight: bolder;
 }
 
+#aCard {
+  display: flex;
+  flex-direction: row;
+  align-items:stretch;
+  margin: 20px 0 20px 0;
+  border: .5px solid black;
+  padding: 5px 0 5px 10px;
+  background-color: rgba(225, 225, 225, 0.6);
+}
+
+#aImg, #aText {
+  align-content: space-between;
+  margin: 0px 10px 0 0;
+}
+#aImg > img {
+  margin: 5px 0 0 0;
+}
+
+#aText > span > h6{
+  margin: 5px 0 0 0;
+  font-size: 16px;
+}
+
+#aText > div{
+  font-size: 13px;
+  margin-top: 5px;
+}
+#aHdLn {
+  font-size: 11px;
+  font-weight: lighter;
+  margin: 0 0 30px 0;
+}
 .input-field.col.s12{
   padding: 0 20px 0 0;
 }
 
+#sec3 > .sContainer > div{
+  max-width: 50%;
+}
+
 #sec4 > .sContainer{
   display: block;
-  /*overflow-y: scroll;*/
 }
