@@ -17,31 +17,20 @@ function buildSection2() {
 function extractTravelAdvisories() {
   let travelAdviceObj = parsedData.advise
   for(let travelAdvice in travelAdviceObj){
-    let $tAdvice = $("<div>");
-    let tAMessage = travelAdviceObj[travelAdvice].advise
-    $tAdvice.append(tAMessage)
-
-    let $tCountry = $("<div>");
-    $tCountry.attr("class", "tCountry")
+    let $tAdvice = $("<div>").append(travelAdviceObj[travelAdvice].advise)
+    let $tCountry = $("<div>", {
+      "class": "tCountry",
+    })
     let tCMessage = "Issued by " + travelAdvice + " "
-    $tCountry.append(tCMessage)
-
-    // let $tDocs = $("<a>", {"text", "Full Report"})
-    // $tDocs.text("Full Report")
-    // let fullDoc = travelAdviceObj[travelAdvice].url
-    // $tDocs.attr("href", fullDoc)
-    // $tDocs.attr("id", "tLink")
-
     let fullDoc = travelAdviceObj[travelAdvice].url
     let $tDocs = $("<a>", {
       "id": "tLink",
-      "href": fullDoc
+      "href": fullDoc,
+      "text": "Full Report"
     })
-    $tDocs.text("Full Report")
 
     $("#travelAdvisories").append($tAdvice);
-    $("#travelAdvisories").append($tCountry);
-    $(".tCountry").append($tDocs)
+    $("#travelAdvisories").append($tCountry.append(tCMessage).append($tDocs));
   }
 }
 
