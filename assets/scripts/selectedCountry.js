@@ -25,9 +25,8 @@ $(function loadPage() {
     console.log("data from localStorage fetched")
     let data = localStorage.getItem("countryInfo")
     parsedData = JSON.parse(data);
-    console.log(parsedData)
     setTimeout(initMap, 0)
-    buildSection1()
+    buildSection1()         // how to fadein? .delay(2000).fadeIn(1000)
     buildSection2()
     // buildSection3()
     buildSection4()

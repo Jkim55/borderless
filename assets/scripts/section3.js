@@ -32,6 +32,7 @@ function parseNYTData(newsURL){
         }
       let snippet = article["snippet"]
       let pubDate = formatPubDate(article["pub_date"])
+      
       console.log("this is the headline: ", headline);
       console.log("this is the articleURL: ", articleURL);
       console.log("this is the thumbnailURL: ", thumbnailURL);

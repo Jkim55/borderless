@@ -39,7 +39,7 @@ h4 {
 #map {
   width: 600px;
   height: 400px;
-  margin: 45px 25px 0 25px;
+  margin: 40px 25px 0 25px;
 }
 
 a {
@@ -53,13 +53,19 @@ a {
 
 #shortName {
   margin: 15px 0 10px 0;
+  color: rgb(183, 40, 40);
 }
 
-h6, #localTD{
+h6 {
   font-size: 16px;
   font-weight: bolder;
+  color: rgb(183, 40, 40);
 }
 
+#localTD, #timeZone {
+  font-weight: bold;
+  color: rgb(183, 40, 40);
+}
 .sContainer {
   display: flex;
   justify-content: space-between;
@@ -75,12 +81,17 @@ h6, #localTD{
   padding: 15px 25px 15px 25px;
 }
 
+div.s1info{
+  padding-right: 0;
+}
+
 .s1flag {
-  margin: 35px 0 0 80px;
+  margin: 25px 0 0 80px;
+  max-height: 100px;
 }
 
 #shortName {
-  margin: 20px 0 5px 0
+  margin: 10px 0 5px 0
 }
 
 #fullName {
@@ -88,7 +99,7 @@ h6, #localTD{
 }
 
 #capital{
-  margin: 5px 0 40px 0px;
+  margin: 5px 0 35px 0px;
 }
 
 .s1header {
@@ -119,7 +130,7 @@ h6, #localTD{
   max-width: 400px
 }
 
-#tLink {
+#tLink, #fxRateFootnote  {
   color: rgb(183, 40, 40);
   font-size: 12px;
 }

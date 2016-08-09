@@ -100,14 +100,17 @@ function extractCurrencySummary() {
 
 function extractFXWidget() {
   let currencyRate = parseFloat(parsedData.currency.rate)
-  fxRate = 1/currencyRate            // fx for 1 USD
+  fxRate = 1/currencyRate
+  let $fxRate = $("<div>")
+  $fxRate.append("FX rate to 1 USD($) is ", + fxRate)          // fx for 1 USD
+  $("fxRateFootnote").append($fxRate);
 }
 
 $("#fxBtn").click((event)=>{
   let $fxInput = $("#fxInput").val()
   let $fxCalc = parseFloat($fxInput)   // (1) Capture user input
   $fxCalc = ($fxCalc * fxRate).toFixed(2)
-  let $fxResults = $("<div>");
+  let $fxResults = $("<div>")
   let snippet = $fxInput + " " + currencyName + " (" + currencySymbol + ") is equivalant to $" + $fxCalc + " USD"
   $fxResults.append(snippet)
   $("#fxList").append($fxResults)
