@@ -13,7 +13,7 @@
   </head>
   <body class="container">
     <div class="row">
-      <div class="col s12 right-align" id="header">
+      <div class="col s12 right-align" id="logo">
         <h4>BORDERLESS</h4>
         <p>Get lost. Stay informed. </p>
       </div>
@@ -30,15 +30,20 @@
         <div class="col s12" id="sec1">
           <div class="sContainer">
             <div class="s1info">
-              <div class="name">
-                <h1 id="shortName"></h1>
-                <h5 id="fullName"></h5>
-                <p id="capital">Capital: </p>
+              <div class="s1header">
+                <div>
+                  <h1 id="shortName"></h1>
+                  <h5 id="fullName"></h5>
+                  <p id="capital">Capital: </p>
+                </div>
+                <div class="s1flag">
+                  <img id = "flag" src="" height=100px>
+                </div>
               </div>
 
               <br>
               <div class="currentTimeDate">
-                <span> Local time &#38; date: </span>
+                <span> Local Time &#38; Date: </span>
                 <span id="localTD"></span>
               </div>
 
@@ -54,11 +59,6 @@
                 <span>(*) not an official language</span>
               </div>
             </div>
-
-            <div class="s1flag">
-              <img id = "flag" src="" height=100px>
-            </div>
-
             <div id="map"></div>
           </div>
         </div>
