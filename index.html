@@ -3,37 +3,39 @@
   <head>
     <meta charset="utf-8">
     <title>Borderless: Get Lost.Stay Informed</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/sandstone/bootstrap.min.css" rel="stylesheet" integrity="sha384-QqZs0aSOGFan3GWVdP4PyCBp6icaF/4n8Q+wsmZUTiiVIqE4r4tFYcb8Osf+8y45" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/styles/index.css">
   </head>
 
   <body>
-    <div class="container-fluid">
-      <div class="row">
+    <div class="wrapper">
+      <div class="header">
         <header id="logo">
           <h2>BORDERLESS </h2>
           <p>Get lost. Stay informed. </p>
         </header>
       </div>
-
-      <div class="row vertical_center">
-        <div class="col-md-6 col-md-offset-3">
-          <div class="form-group btn_margin">
+      <div class="search">
+        <div class="valign-wrapper center-block" id="searchBoxWrapper">
+          <div id="miniWrapper">
             <h3>Where to?</h3>
             <form class="form-horizontal">
               <div class="form-group">
                 <input class="form-control input-lg" type="text" id="searchBox" placeholder="Find a destination by country">
               </div>
-              <div class="form-group">
+              <div class="form-group" id="submitBtn">
                 <button type="submit" class="btn btn-primary"id="submit">Let's Go!</button>
               </div>
             </form>
           </div>
         </div>
       </div>
-      <div class="row">
-        <footer>
+      <div>
+        <footer class ="right">
+          <a href="index.html">Home</a>
+          <span> / </span>
           <a href="aboutBorderless.html">About this App</a>
         </footer>
       </div>

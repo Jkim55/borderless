@@ -22,7 +22,7 @@ $(function loadPage() {
       console.error(error)
     })
   } else {
-    console.log("data from localStorage fetched")
+    console.log("Country data from localStorage fetched")
     let data = localStorage.getItem("countryInfo")
     parsedData = JSON.parse(data);
     setTimeout(initMap, 0)

@@ -6,6 +6,17 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+header {
+  text-align: right;
+  margin: 15px 15px 0 0
+}
+
+#logo>*{
+  display: inline;
+  margin-bottom: 0
+}
+
+
 .container {
   margin: 0 auto;
   max-width: 1280px;
@@ -49,11 +60,11 @@ a {
 
 #logo > * {
   display: inline-block;
-  margin: 15px 15px 45px 0;
+  margin: 10px 15px 35px 0;
 }
 
 #shortName {
-  margin: 15px 0 10px 0;
+  margin: 0 0 10px 0;
   color: rgb(183, 40, 40);
 }
 
@@ -66,9 +77,9 @@ h6 {
 .sContainer {
   display: flex;
   justify-content: space-between;
-  margin: 15px 0 0 0;
+  margin: 15px 0 5px 0;
   background-color:rgba(225, 225, 225, 0.6);
-  height: 510px;
+  height: 475px;
   width: 1200px;
   overflow-y: scroll;
 }
@@ -202,4 +213,17 @@ div.s1info{
 
 #transLabel:active {
   margin-bottom: 50px
+}
+
+footer {
+  font-size: 12px;
+  margin-right: 31.828px;
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+
+}
+
+footer > a {
+  color: rgb(255, 0, 0);
+  font-weight: bold;
 }
