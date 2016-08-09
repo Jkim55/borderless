@@ -46,8 +46,8 @@ function parseNYTData(newsURL){
 
       let $image = $("<img>", {
         "src": thumbnailURL,
-        "width": "125px",
-        "height":"125px"
+        "width": "150px",
+        "height":"150px"
       })
       let $thumbnail = $("<span>", {"id": "aImg"}).append($image)
 
@@ -73,7 +73,8 @@ function guardianData(){
 function guardianURL() {
   let requestedBegDate = setBegDate()
   let requestedEndDate = setEndDate()
-  let guardianAPIURL="http://content.guardianapis.com/search?q=" + countryName.replace(/ /g, "%20") + "&section=world|international|travel&tag=-uk/uk,(world/" + countryName.replace(/ /g, "-").toLowerCase() + "|world/" + countryName.replace(/ /g, "").toLowerCase() + ")&show-fields=trailText,thumbnail&show-editors-picks=true&to-date=" + requestedEndDate+"&from-date="+requestedBegDate +"&order-by=newest&api-key=" + guardianKey
+  let guardianAPIURL="https://content.guardianapis.com/search?q=" + countryName.replace(/ /g, "%20") + "&section=world|international|travel&tag=-uk/uk,(world/" + countryName.replace(/ /g, "-").toLowerCase() + "|world/" + countryName.replace(/ /g, "").toLowerCase() + ")&show-fields=trailText,thumbnail&show-editors-picks=true&to-date=" + requestedEndDate+"&from-date="+requestedBegDate +"&order-by=newest&api-key=" + guardianKey
+  console.log(guardianAPIURL)
   return guardianAPIURL
 }
 
@@ -81,6 +82,7 @@ function parseGuardianData(newsURL){
   $.get(newsURL)
   .then((data)=>{
     let articlesArr = data.response.results           //arr of obj
+    console.log(data);
     for(let index in articlesArr){
       let article = articlesArr[index]
       let headline = article.webTitle
@@ -106,8 +108,8 @@ function parseGuardianData(newsURL){
 
       let $image = $("<img>", {
         "src": thumbnailURL,
-        "width": "125px",
-        "height":"125px"
+        "width": "100px",
+        "height":"100px"
       })
       let $thumbnail = $("<span>", {"id": "aImg"}).append($image)
       let $article = $("<span>", {"id": "aText"}).append($hdLn).append($pubDate).append($snippet)
