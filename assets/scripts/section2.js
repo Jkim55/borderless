@@ -26,11 +26,18 @@ function extractTravelAdvisories() {
     let tCMessage = "Issued by " + travelAdvice + " "
     $tCountry.append(tCMessage)
 
-    let $tDocs = $("<a>")
-    $tDocs.text("Full Report")
+    // let $tDocs = $("<a>", {"text", "Full Report"})
+    // $tDocs.text("Full Report")
+    // let fullDoc = travelAdviceObj[travelAdvice].url
+    // $tDocs.attr("href", fullDoc)
+    // $tDocs.attr("id", "tLink")
+
     let fullDoc = travelAdviceObj[travelAdvice].url
-    $tDocs.attr("href", fullDoc)
-    $tDocs.attr("id", "tLink")
+    let $tDocs = $("<a>", {
+      "id": "tLink",
+      "href": fullDoc
+    })
+    $tDocs.text("Full Report")
 
     $("#travelAdvisories").append($tAdvice);
     $("#travelAdvisories").append($tCountry);
@@ -41,10 +48,14 @@ function extractTravelAdvisories() {
 
 function extractVaccinations() {
   let vaccinationArr = parsedData.vaccinations
-  for(let vaccination in vaccinationArr){
-    let $vaccine = $("<div>");
-    $vaccine.append(vaccinationArr[vaccination].name, ": ", vaccinationArr[vaccination].message)
-    $("#vaccinationRecs").append($vaccine);
+  if (vaccinationArr.length !== 0){
+    for(let vaccination in vaccinationArr){
+      let $vaccine = $("<div>");
+      $vaccine.append(vaccinationArr[vaccination].name, ": ", vaccinationArr[vaccination].message)
+      $("#vaccinationRecs").append($vaccine);
+    }
+  } else {
+    $("#vaccinationRecs").append("No vaccination recommendations exist for travel to ", countryName)
   }
 }
 

@@ -81,6 +81,11 @@ h6 {
 
 div.s1info{
   padding-right: 0;
+  /*background-color:rgba(225, 225, 225, 0.6);*/
+}
+
+.s1info > * {
+  margin: 10px 0 5px 0;
 }
 
 .s1flag {
@@ -107,10 +112,6 @@ div.s1info{
 .s1header > div {
   flex-direction: row;
   align-content: space-between;
-}
-
-.s1info > * {
-  margin: 10px 0 5px 0;
 }
 
 #localTD, #timeZone {
@@ -193,4 +194,12 @@ div.s1info{
 
 #sec4 > .sContainer{
   display: block;
+}
+
+#translator {
+  padding: 0 0 0 0;
+}
+
+#transLabel:active {
+  margin-bottom: 50px
 }
