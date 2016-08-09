@@ -12,11 +12,11 @@
     <link rel="stylesheet" type="text/css" href="assets/styles/selectedCountry.css">
   </head>
   <body class="container">
+    <div class="col s12 right-align" id="logo">
+      <h4>BORDERLESS</h4>
+      <p>Get lost. Stay informed. </p>
+    </div>
     <div class="row">
-      <div class="col s12 right-align" id="logo">
-        <h4>BORDERLESS</h4>
-        <p>Get lost. Stay informed. </p>
-      </div>
       <div class="col s12">
         <ul class="tabs" id="tabnav">
           <li class="tab col s3" id="generalInfo"><a href="#general">General Info</a></li>
@@ -34,7 +34,7 @@
                 <div>
                   <h1 id="shortName"></h1>
                   <h5 id="fullName"></h5>
-                  <p id="capital">Capital: </p>
+                  <p id="capital">CAPITAL: </p>
                 </div>
                 <div class="s1flag">
                   <img id = "flag" src="" height=100px>
@@ -43,7 +43,7 @@
 
               <br>
               <div class="currentTimeDate">
-                <span> Local Time &#38; Date: </span>
+                <span> Current Local Time &#38; Date: </span>
                 <span id="localTD"></span>
               </div>
 
@@ -53,10 +53,9 @@
               </div>
               <br>
               <div class="langs">
-                <span>The language(s) spoken in </span>
-                <span id="langCountry"></span>
-                <div id="langArr"></div>
-                <span>(*) not an official language</span>
+                <span id="langCountry">Language(s) spoken in </span>
+                <ul id="langList"></ul>
+                <div id=langFootnote>* denotes an unofficial language of certain regions of the country</div>
               </div>
             </div>
             <div id="map"></div>
@@ -70,11 +69,11 @@
             <!-- <div id="s2info"> -->
             <div class="preTravel">
               <h5>Travel Advisories</h5>
-              <div class="travelAdvisories">
-                <!-- location for dynamically created t Advisories -->
+              <div id="travelAdvisories">
+                <!-- location for dynamically created TravelAdvisories -->
               </div>
 
-              <div class="vaccinationRecs">
+              <div id="vaccinationRecs">
                 <h5>Vaccination Recommendations</h5>
                 <!-- location for dynamically created vaccinationRecs -->
               </div>
@@ -100,26 +99,23 @@
                 <div id="socket">Socket Type(s): </div>
               </div>
             </div>
-
             <div class="currency">
               <div class="fxSummary">
+                <h5>Currency Exchange</h5>
                 <span> The currency in </span>
                 <span id=fxInfo> is </span>
               </div>
               <div class="fxWidget">
-                <form class="col s12">
+                <form id="fxForm"class="col s12">
                   <div class="row">
                     <div class="input-field col s12">
                       <textarea id="fxInput" class="materialize-textarea"></textarea>
-                      <label for="fxInput"></label>
+                      <label id="fxLabel" for="fxInput">Convert to USD</label>
                     </div>
                     <a class="waves-effect waves-light btn" id="fxBtn">Calculate Conversion</a>
                   </div>
                 </form>
-                <div id="coverted">
-                  <span id=fxCalculated> is equivalant to $</span>
-                  <span> USD.</span>
-                </div>
+                <div id="fxList"></div>  <!-- converted fx rates go here -->
               </div>
             </div>
           </div>
@@ -128,26 +124,32 @@
 
       <div id="news" class="col s12">
         <div class="col s12" id="sec3">
+          <div class="sContainer">
+
+          </div>
         </div>
       </div>
 
       <div id="translate" class="col s12">
         <div class="col s12" id="sec4">
-          <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <textarea id="translator" class="materialize-textarea"></textarea>
-                  <label for="translator">Input Text for Translation</label>
+          <div class="sContainer">
+            <div id="transWidget">
+              <form id="transForm" class="col s12">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea id="translator" class="materialize-textarea"></textarea>
+                    <label for="translator" id="transLabel"> Translate English Phrases</label>
+                  </div>
+                  <a class="waves-effect waves-light btn" id="transBtn">Translate Phrase</a>
                 </div>
-                <a class="waves-effect waves-light btn" id="transBtn">Translate Phrase</a>
-              </div>
-            </form>
-            <div id="results"></div>
+              </form>
+            </div>
+
+            <div id="transResults"></div>
+
           </div>
         </div>
       </div>
-
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">

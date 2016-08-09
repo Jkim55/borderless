@@ -17,29 +17,37 @@ function buildSection2() {
 function extractTravelAdvisories() {
   let travelAdviceObj = parsedData.advise
   for(let travelAdvice in travelAdviceObj){
-    let div = $("<div>");
-    div.append(travelAdviceObj[travelAdvice].advise, travelAdviceObj[travelAdvice].url)
-    $("#sec2").append(div);
-  }
+    let $tAdvice = $("<div>");
+    let tAMessage = travelAdviceObj[travelAdvice].advise // LATER: remove <!-- --> if it exists
+    $tAdvice.append(tAMessage)
+    console.log(tAMessage);
 
-  // Will want to correlate with ISO- http://country.io/names.json)
-  // OBJ looks like this... must iterate thru the OBJ to pull data value, which is a nested obj
-  //     {ISO2: {
-  //       advise: "<!-- START adv-taiwan -->Exercise normal security precautions<!-- END adv-taiwan -->"
-  //       url: "http://travel.gc.ca/destinations/taiwan"
-  //       }
-  //     }
+    let $tCountry = $("<div>");
+    $tCountry.attr("class", "tCountry")
+    let tCMessage = "Issued by " + travelAdvice + " "
+    $tCountry.append(tCMessage)
+    console.log(tCMessage);
+
+    let $tDocs = $("<a>")
+    $tDocs.text("Full Report")
+    let fullDoc = travelAdviceObj[travelAdvice].url
+    $tDocs.attr("href", fullDoc)
+    $tDocs.attr("id", "tLink")
+    console.log($($tDocs));
+
+    $("#travelAdvisories").append($tAdvice);
+    $("#travelAdvisories").append($tCountry);
+    $(".tCountry").append($tDocs)
+  }
 }
-// Message to look like:
-//     <message from ISO2.advice> issued by <iso2 countryname>
-//     Full report <href to url>
+
 
 function extractVaccinations() {
   let vaccinationArr = parsedData.vaccinations
   for(let vaccination in vaccinationArr){
-    let div = $("<div>");
-    div.append(vaccinationArr[vaccination].name, vaccinationArr[vaccination].message)
-    $("#sec2").append(div);
+    let $vaccine = $("<div>");
+    $vaccine.append(vaccinationArr[vaccination].name, ": ", vaccinationArr[vaccination].message)
+    $("#vaccinationRecs").append($vaccine);
   }
 }
 
@@ -99,8 +107,10 @@ $("#fxBtn").click((event)=>{
   let $fxInput = $("#fxInput").val()
   let $fxCalc = parseFloat($fxInput)   // (1) Capture user input
   $fxCalc = ($fxCalc * fxRate).toFixed(2)
-  $("#fxCalculated").prepend($fxInput, " ", currencyName, " (", currencySymbol, ")")
-  $("#fxCalculated").append($fxCalc)
+  let $fxResults = $("<div>");
+  let snippet = $fxInput + " " + currencyName + " (" + currencySymbol + ") is equivalant to $" + $fxCalc + " USD"
+  $fxResults.append(snippet)
+  $("#fxList").append($fxResults)
 })
 
 // travelbriefing.org Branding

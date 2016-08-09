@@ -9,6 +9,7 @@ $(function loadPage() {
   let jsonURL = getCountryJSON()     // assigns result of getCountryJSON to variable
   $.get(jsonURL)                     // passes in result from prior line to getRequestJSON
   .then((data)=> {                    // promise: take data & assign it to globalV
+    localStorage.setItem("countryInfo", data)
     parsedData = JSON.parse(data);
     setTimeout(initMap, 0)
     buildSection1()

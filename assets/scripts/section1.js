@@ -29,7 +29,7 @@ function extractCapital(){
     if (capitalISOPairs.hasOwnProperty(iso2)){
       capital = capitalISOPairs[iso2]
     }
-    $("#capital").append(capital);
+    $("#capital").append(capital.toUpperCase());
   })
   .catch((error)=> {
     console.error(error)
@@ -103,18 +103,17 @@ function calcTime(offset) {
 
 function extractLanguage(){
   languageArr = parsedData.language
-  let languageOutput = []  // might change to array
+  $("#langCountry").append(countryName, ": ")
   for(let language in languageArr){
+    let $lang = $("<li>");
     if(languageArr[language].official === 'Yes'){
-        languageOutput.push(languageArr[language].language)
+      $lang.append(languageArr[language].language)
+      $("#langList").append($lang)
     } else {
-      languageOutput.push(languageArr[language].language + '*')
+      $lang.append(languageArr[language].language + '*')
+      $("#langList").append($lang)
     }
   }
-  languageOutput.splice(languageOutput.length-1,0,'and')
-  languageOutput = languageOutput.join(', ')
-  $("#langCountry").append(countryName, ": ")
-  $("#langArr").append(languageOutput);
 }
 
 

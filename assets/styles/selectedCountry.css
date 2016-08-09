@@ -20,13 +20,12 @@ body {
 h4 {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 500;
-  /*color:orange;*/
 }
 
 .tabs .tab a{
   color:black;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .tabs .tab a:hover{
@@ -64,15 +63,16 @@ h6, #localTD{
 .sContainer {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0 0 0;
+  margin: 15px 0 0 0;
   background-color:rgba(225, 225, 225, 0.6);
-  height: 490px;
+  height: 510px;
+  width: 1200px;
+  overflow-y: scroll;
 }
 
 .sContainer > div {
   flex-direction: row;
-  padding: 15px 15px 15px 25px;
-
+  padding: 15px 25px 15px 25px;
 }
 
 .s1flag {
@@ -98,4 +98,46 @@ h6, #localTD{
 .s1header > div {
   flex-direction: row;
   align-content: space-between;
+}
+
+#langList {
+  margin: 5px 0 15px 0;
+}
+
+#langFootnote {
+  font-size: 12px;
+}
+
+.preTravel {
+  max-width: 650px;
+}
+
+.onLocation {
+  min-width: 300px;
+}
+.currency {
+  max-width: 400px
+}
+
+#tLink {
+  color: rgb(183, 40, 40);
+  font-size: 12px;
+}
+
+#transBtn, #fxBtn{
+  background-color: rgb(183, 40, 40);
+}
+
+#transLabel, #fxLabel, .textbox {
+  color: rgb(183, 40, 40);
+  font-weight: bolder;
+}
+
+.input-field.col.s12{
+  padding: 0 20px 0 0;
+}
+
+#sec4 > .sContainer{
+  display: block;
+  /*overflow-y: scroll;*/
 }

@@ -68,10 +68,10 @@ $("#transBtn").click((event)=>{
     .then((phrase) => {                                  // (2.3) Append to dom
       let $originalText = $("<h5>");
       $originalText.append(textToTrans.toUpperCase())
-      let $translated = $("<div>");
-      $translated.append(" in ", langsToTrans[index],": ", phrase)
-      $("#results").append($originalText);
-      $("#results").append($translated);
+      let $translated = $("<div>")
+      $translated.append(langsToTrans[index],": ", phrase)
+      $("#transResults").append($originalText);
+      $("#transResults").append($translated);
     })
     .catch((error)=> {
       console.error(error)
